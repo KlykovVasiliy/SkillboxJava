@@ -1,0 +1,71 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static java.lang.Character.*;
+
+public class Main {
+    public static void main(String[] args) {
+        String text = null;
+        Pattern pattern = Pattern.compile("([А-Я]{1,1}([а-я])+[\\s]?)+");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        while (true) {
+            System.out.println("Введите Фамилию, имя и отчество чувака");
+            try {
+                text = reader.readLine();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            if (text.equals("")) {
+                try {
+                    throw new NullPointerException();
+                } catch (RuntimeException e) {
+                    System.err.println("Строка не может быть пустой. Введите ФИО полностью.");
+                }
+            }
+            Matcher matcher = pattern.matcher(text);
+            boolean matches = matcher.matches();
+
+            String fragments[] = text.split("\\s");
+            for (int a = 0; a < fragments.length; a++) {
+                for (int b = 0; b < fragments[a].length(); b++) {
+                    char wordSymbol = fragments[a].charAt(b);
+                    if (isLetter(wordSymbol)) {
+                        if (b == 0) {
+                            if (isLowerCase(wordSymbol)) {                     //Обработка первой буквы ФИО
+                                try {
+                                    throw new WordException();
+                                } catch (WordException e) {
+                                    System.err.println("Первая буква должна быть заглавной. " +
+                                            "Повторите ввод.");
+                                }
+                            }
+                        } else if (isUpperCase(wordSymbol)) {                  //Обработка букв после заглавной
+                            try {
+                                throw new WordException();
+                            } catch (WordException e) {
+                                System.err.println("После заглавной буквы должны быть строчные буквы. " +
+                                        "Повторите ввод.");
+                            }
+                        }
+                    } else if (!isLetter(wordSymbol)) {                          //Обработка наличия цифрового символа
+                        try {
+                            throw new WordException();
+                        } catch (WordException e) {
+                            System.err.println("В ФИО должны быть только буквы. Повторите ввод.");
+                        }
+                    }
+                }
+            }
+            if(matches) {
+                System.out.println("Фамилия: " + fragments[0]);
+                System.out.println("Имя: " + fragments[1]);
+                System.out.println("Отчество: " + fragments[2]);
+                break;
+            }
+        }
+    }
+}

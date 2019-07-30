@@ -1,0 +1,1 @@
+1 Почему в классе main не работает метод getCoatColor() из enum ColorCats?
