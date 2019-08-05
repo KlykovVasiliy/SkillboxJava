@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2f8e51b3-4c56-46a1-87da-0bcfa7da06c1" name="Default Changelist" comment="" />
+    <list default="true" id="2f8e51b3-4c56-46a1-87da-0bcfa7da06c1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lessons_5_1/cross/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lessons_5_1/cross/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/listTodo/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/listTodo/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +23,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="97" column="1" selection-start-line="97" selection-start-column="1" selection-end-line="97" selection-end-column="1" />
+            <state relative-caret-position="1190">
+              <caret line="70" column="97" lean-forward="true" selection-start-line="70" selection-start-column="97" selection-end-line="70" selection-end-column="97" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#operationWithNum#0;class#Main#0" />
               </folding>
             </state>
           </provider>
@@ -41,7 +46,16 @@
       <find>oper</find>
       <find>text</find>
       <find>matcher</find>
+      <find>nameComand</find>
+      <find>matcher.group(3)</find>
     </findStrings>
+    <replaceStrings>
+      <replace>nameTeam</replace>
+      <replace>nameList</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -62,12 +76,12 @@
     <option name="width" value="1380" />
     <option name="height" value="735" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -84,10 +98,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -134,8 +150,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1380" height="735" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15833333" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16742425" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -144,8 +161,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32890365" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.77242523" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.641196" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.54318935" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -166,11 +183,10 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="97" column="1" selection-start-line="97" selection-start-column="1" selection-end-line="97" selection-end-column="1" />
+        <state relative-caret-position="1190">
+          <caret line="70" column="97" lean-forward="true" selection-start-line="70" selection-start-column="97" selection-end-line="70" selection-end-column="97" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#operationWithNum#0;class#Main#0" />
           </folding>
         </state>
       </provider>
