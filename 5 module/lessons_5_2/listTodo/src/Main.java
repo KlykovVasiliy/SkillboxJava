@@ -23,8 +23,9 @@ public class Main {
                 Optional<Integer> position = Optional.of(matcher.group("indexList"))
                         .filter(num -> num.length() > 0).map(Integer::parseInt);
                 Optional<String> nameCase = Optional.of(matcher.group("text"))
-                        .filter(s -> s.length() > 0).map(String::toString);
+                        .filter(s -> s.length() > 0);
 
+                boolean exit = false;
                 switch (nameTeam) {
                     case "ADD":
                         addToList(listTodo, position, nameCase);
@@ -38,11 +39,14 @@ public class Main {
                     case "DELETE":
                         deleteListItem(listTodo, position);
                         break;
+                    case "EXIT":
+                        exit = true;
+                        break;
                 }
-                if (nameTeam.equals("EXIT")) {
+                if (exit) {
                     break;
                 }
-            } else if (!matcher.find()) {
+            } else {
                 System.err.printf("Повторите пожалуйста ввод команды, индекс и наименования " +
                         "дела согласно примеру.%nADD Какое-то дело%nADD 4 Какое-то дело " +
                         "на четвертом месте%nEDIT 3 Новое название дела%nLIST%nDELETE 7%n");
@@ -51,7 +55,7 @@ public class Main {
     }
 
     public static void addToList(ArrayList<String> list, Optional<Integer> index, Optional<String> text) {
-        String str = text.isPresent() ? text.get() : retypingText();
+        String str = text.orElseGet(Main::retypingText);
         if (index.isEmpty()) {
             list.add(str);
         }
@@ -59,7 +63,7 @@ public class Main {
             int num = index.get();
             if (isNumberLessLimit(list, num)) {
                 list.add(num, str);
-            } else if (!isNumberLessLimit(list, num)) {
+            } else {
                 num = retypingNum(list);
                 list.add(num, str);
             }
@@ -67,11 +71,11 @@ public class Main {
     }
 
     public static void replaceListItem(ArrayList<String> list, Optional<Integer> index, Optional<String> text) {
-        String str = text.isPresent() ? text.get() : retypingText();
+        String str = text.orElseGet(Main::retypingText);
         int num = index.isPresent() ? index.get() : retypingNum(list);
         if (isNumberLessLimit(list, num)) {
             list.set(num, str);
-        } else if (!isNumberLessLimit(list, num)) {
+        } else {
             num = retypingNum(list);
             list.set(num, str);
         }
@@ -90,18 +94,14 @@ public class Main {
         int num = index.isPresent() ? index.get() : retypingNum(list);
         if (isNumberLessLimit(list, num)) {
             list.remove(num);
-        } else if (!isNumberLessLimit(list, num)) {
+        } else {
             num = retypingNum(list);
             list.remove(num);
         }
     }
 
     public static boolean isNumberLessLimit(ArrayList<String> list, int indexItem) {
-        boolean numberLess = false;
-        if (indexItem <= list.size() && indexItem >= 0) {
-            numberLess = true;
-        }
-        return numberLess;
+        return indexItem <= list.size() && indexItem >= 0;
     }
 
     public static String retypingText() {
