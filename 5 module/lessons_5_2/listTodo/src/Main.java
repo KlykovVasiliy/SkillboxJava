@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-
     public static void main(String[] args) {
         ArrayList<String> listTodo = new ArrayList<>();
         Pattern pattern = Pattern.compile("([A-Z]{3,6})\\s?(?<indexList>\\d*)\\s?" +
@@ -119,15 +118,18 @@ public class Main {
     }
 
     public static int retypingNum(ArrayList<String> list) {
+        String numStr;
+        int num = list.size() + 1;
+        Pattern pat = Pattern.compile("[\\d]+");
         Scanner scanner = new Scanner(System.in);
-        int num = 0;
-        while (true) {
+        while (num < 0 || num > list.size()) {
             System.err.printf("Количество дел в списке %d. Введенный номер дела " +
                     "должен быть больше либо равным 0 и меньше либо равным " +
-                    "%d.%n", list.size(), list.size() - 1);
-            num = scanner.nextInt();
-            if (num >= 0 && num < list.size()) {
-                break;
+                    "%d. Введите пожалуйста только цифру.%n", list.size(), list.size() - 1);
+            numStr = scanner.nextLine();
+            Matcher mat = pat.matcher(numStr);
+            if (mat.find()) {
+                num = Integer.parseInt(numStr);
             }
         }
         return num;
