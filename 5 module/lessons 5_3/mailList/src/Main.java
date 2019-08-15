@@ -6,11 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         TreeSet<String> listEmail = new TreeSet<String>();
-        Scanner scanner = new Scanner(System.in);
-        Pattern patString = Pattern.compile("(?<team>[A-Z]{3,4})\\s?(?<nameEmail>\\w{2,10}@" +
-                "[a-z]{2,7}\\.[a-z]{2,3})?");
+        Pattern patString = Pattern.compile("^(?<team>[A-Z]{3,4})\\s?(?<nameEmail>[\\w@\\.]+)?$");
         System.out.printf("ADD регистрация эл. почты в списке учета.%n" +
                 "LIST вывод всего списка.%nEXIT завершение программы.%n" +
                 "Для регистрации эл. почты в списке введите команду ADD " +
@@ -49,16 +48,22 @@ public class Main {
         }
     }
 
-    public static String inputRepeatEmail() {
-        Pattern patEmail = Pattern.compile("(\\w{2,10}@[a-z]{2,7}\\.[a-z]{2,3}){1,1}");
-        Scanner scanner = new Scanner(System.in);
-        String email;
+    private static boolean isEmail (String str) {
+        Pattern patEmail = Pattern.compile("^(\\w{2,10}@[a-z]{2,7}\\.[a-z]{2,3})$");
+        Matcher matEmail = patEmail.matcher(str);
+        boolean mailBool = false;
+        if (matEmail.find()) {
+            mailBool = true;
+        }
+        return mailBool;
+    }
 
+    private static String inputRepeatEmail() {
+        String email;
         while (true) {
-            System.out.printf("Введите электронную почту для регистрации.%n");
+            System.out.printf("Введите электронную почту для регистрации. Без команды.%n");
             email = scanner.nextLine().trim();
-            Matcher matEmail = patEmail.matcher(email);
-            if (matEmail.find()) {
+            if (isEmail(email)) {
                 break;
             } else {
                 System.err.println("Электронная почта введена неверно. Повторите ввод.");
@@ -67,17 +72,25 @@ public class Main {
         return email;
     }
 
-    public static void addToEmail(TreeSet<String> set, Optional<String> optional) {
+    private static void addToEmail(TreeSet<String> set, Optional<String> optional) {
         String str = optional.orElseGet(Main::inputRepeatEmail);
-        if (set.contains(str)) {
-            System.out.println("Такая почта уже зарегистрирована. Повторите пожалуйста ввод.");
-            str = inputRepeatEmail();
-        } else {
-            set.add(str);
+        while (true) {
+            if (isEmail(str)) {
+                if (!set.contains(str)) {
+                    set.add(str);
+                    break;
+                } else {
+                    System.out.println("Такая почта уже зарегистрирована. Повторите пожалуйста ввод.");
+                    str = inputRepeatEmail();
+                }
+            } else {
+                System.err.println("Не верный формат электронной почты. Повторите ввод");
+                str = inputRepeatEmail();
+            }
         }
     }
 
-    public static void outputListEmail(TreeSet<String> set) {
+    private static void outputListEmail(TreeSet<String> set) {
         Iterator<String> iterator = set.iterator();
         while (iterator.hasNext()) {
             String text = iterator.next();
