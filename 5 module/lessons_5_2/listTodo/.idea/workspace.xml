@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f8e51b3-4c56-46a1-87da-0bcfa7da06c1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/phoneBook.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lessons 5_3/mailList/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lessons 5_3/mailList/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lessons 5_3/mailList/out/production/mailList/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../lessons 5_3/mailList/out/production/mailList/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/out/production/phoneBook/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lessons_5_4/phoneBook/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../doc_2019-07-30_19-29-43.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../doc_2019-07-30_19-29-43.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="117" column="5" lean-forward="true" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
+            <state relative-caret-position="622">
+              <caret line="132" column="13" selection-start-line="132" selection-start-column="13" selection-end-line="132" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,7 +85,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -104,6 +102,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -156,7 +155,7 @@
     <frame x="-7" y="0" width="1380" height="735" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20530303" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21136364" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -187,8 +186,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="117" column="5" lean-forward="true" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
+        <state relative-caret-position="622">
+          <caret line="132" column="13" selection-start-line="132" selection-start-column="13" selection-end-line="132" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
