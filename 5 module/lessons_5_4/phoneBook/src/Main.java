@@ -1,6 +1,4 @@
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,47 +7,50 @@ public class Main {
     private static TreeMap<String, String> phoneBook = new TreeMap<String, String>();
 
     public static void main(String[] args) {
-        Pattern pattern = Pattern.compile("^(?<comand>[A-Z]{3,4})(?<phoneNumber>\\s.{10,})?$");
+        Pattern pattern = Pattern.compile("(?<phoneNumber>\\s?[\\s\\d\\+\\(\\)\\-]{10,17})?" +
+                "(?<nameContactOrComand>\\s?[\\s\\wА-Яа-яёй]{2,47})?");
 
         while (true) {
-            System.out.printf("Если хотите добавить контакт в телефонную книгу, введите команду " +
-                    "ADD и далее через пробел телефонный номер в любом формате%n" +
+            System.out.printf("Если хотите добавить контакт в телефонную книгу, введите " +
+                    "телефонный номер в любом формате или наименование контакта%n" +
                     "Если хотите просмотреть весь список контактов, введите команду LIST%n" +
                     "Для завершения работы программы введите EXIT%n");
             String text = scanner.nextLine();
             Matcher matcher = pattern.matcher(text);
             if (matcher.find()) {
-                String comand = matcher.group("comand").trim();
-                if (!isComand(comand)) {
-                    comand = repeatComand();
-                }
+                Optional<String> optionalPhoneNumber = Optional.ofNullable
+                        (matcher.group("phoneNumber")).filter(num -> num.length() > 0);
+                Optional<String> optionalNameContact = Optional.ofNullable
+                        (matcher.group("nameContactOrComand")).filter(name -> name.length() > 0);
 
-                boolean exit = false;
-                switch (comand) {
-                    case "LIST":
-                        outputAllContact(phoneBook);
-                        break;
-                    case "EXIT":
-                        exit = true;
-                        break;
-                    case "ADD":
-                        String phone = matcher.group("phoneNumber").trim();
-                        phone = formatPhoneNumber(phone);
-                        if (isPhoneFound(phoneBook, phone)) {
-                            infoAboutContact(phoneBook, phone);
-                        } else if (!isPhoneFound(phoneBook, phone)) {
-                            String nameUser = askUserForName();
-                            if (isNameFound(phoneBook, nameUser)) {
-                                infoAboutContact(phoneBook, nameUser);
-                            } else {
-                                phoneBook.put(nameUser, phone);
-                                System.out.printf("Контакт добавлен.%n");
-                            }
+                String phoneNumber;
+                String nameContact;
+                if (optionalPhoneNumber.isPresent()) {
+                    phoneNumber = formatPhoneNumber(text);
+                    if (isPhoneFound(phoneNumber)) {
+                        infoAboutContact(phoneNumber);
+                    } else {
+                        nameContact = repeatNameContact();
+                        if (isNameFound(nameContact)) {
+                            infoAboutContact(nameContact);
+                        } else {
+                            phoneBook.put(nameContact, phoneNumber);
                         }
-                        break;
-                }
-                if (exit) {
-                    break;
+                    }
+                } else if (optionalNameContact.isPresent()) {
+                    nameContact = optionalNameContact.get();
+                    if (isNameFound(nameContact)) {
+                        infoAboutContact(nameContact);
+                    } else if (isComand(nameContact)) {
+                        outputAllContact();
+                    } else {
+                        phoneNumber = formatPhoneNumber(repeatPhoneNumber());
+                        if (isPhoneFound(phoneNumber)) {
+                            infoAboutContact(phoneNumber);
+                        } else {
+                            phoneBook.put(nameContact, phoneNumber);
+                        }
+                    }
                 }
             } else {
                 System.err.printf("Строка введена не верно.%n");
@@ -57,9 +58,9 @@ public class Main {
         }
     }
 
-    private static void outputAllContact(TreeMap<String, String> map) {
+    private static void outputAllContact() {
         int countContact = 0;
-        for (Map.Entry<String, String> pair : map.entrySet()) {
+        for (Map.Entry<String, String> pair : phoneBook.entrySet()) {
             countContact++;
             String key = pair.getKey();
             String value = pair.getValue();
@@ -69,8 +70,8 @@ public class Main {
         }
     }
 
-    private static void infoAboutContact(TreeMap<String, String> map, String text) {
-        for (Map.Entry<String, String> pair : map.entrySet()) {
+    private static void infoAboutContact(String text) {
+        for (Map.Entry<String, String> pair : phoneBook.entrySet()) {
             String key = pair.getKey();
             String value = pair.getValue();
             if (text.equals(key) || text.equals(value)) {
@@ -81,68 +82,64 @@ public class Main {
         }
     }
 
-    private static boolean isComand(String comand) {
-        boolean text1 = false;
-        if (comand.equals("ADD")) {
-            text1 = true;
-        } else if (comand.equals("LIST")) {
-            text1 = true;
-        } else if (comand.equals("EXIT")) {
-            text1 = true;
-        } else {
-            System.err.println("Введенной команды нет в списке допустимых команд." +
-                    "Повторите ввод команды заново.");
-        }
-        return text1;
-    }
-
-    private static boolean isPhoneFound(TreeMap<String, String> map, String phone) {
+    private static boolean isPhoneFound(String phone) {
         boolean isPhone = false;
-        if (map.containsValue(phone)) {
+        if (phoneBook.containsValue(phone)) {
             System.err.println("В телефонной книге уже присутствует контакт с таким же номером.");
             isPhone = true;
         }
         return isPhone;
     }
 
-    private static boolean isNameFound(TreeMap<String, String> map, String nameUser) {
+    private static boolean isNameFound(String nameUser) {
         boolean isName = false;
-        if (map.containsKey(nameUser)) {
+        if (phoneBook.containsKey(nameUser)) {
             System.err.println("В телефонной книге уже присутствует контакт с таким же именем.");
             isName = true;
         }
         return isName;
     }
 
-    private static String formatPhoneNumber(String NumberPhone) {
+    private static boolean isComand(String comand) {
+        String[] list = {"LIST"};
+        ArrayList<String> listComand = new ArrayList<>(Arrays.asList(list));
+        String comandTemp = comand.toUpperCase();
+        return listComand.contains(comandTemp);
+    }
+
+    private static boolean isNameContact(String nameContact) {
+        Pattern patternName = Pattern.compile("^(?<name>[\\wА-Яа-яёй]{2,15})\\s?" +
+                "(?<partonymic>[\\wА-Яа-яёй]{2,15})?\\s?(?<surname>[\\wА-Яа-яёй]{2,15})?$");
+        Matcher matcherName = patternName.matcher(nameContact);
+        boolean isName = false;
+        if (matcherName.find()) {
+            isName = true;
+        } else {
+            System.err.printf("В наименовании контакта могут присутствовать только " +
+                    "следующие символы: A-Za-zА-Яа-яёй0-9_.%n Повторите ввод заново.%n%n");
+        }
+        return isName;
+    }
+
+    private static String formatPhoneNumber(String numberPhone) {
         while (true) {
-            NumberPhone = NumberPhone.replaceAll("[^0-9]+", "");
-            Character firstSymbol = NumberPhone.charAt(0);
+            numberPhone = numberPhone.replaceAll("[^0-9]+", "");
+            Character firstSymbol = numberPhone.charAt(0);
             if (firstSymbol.equals('8')) {
-                NumberPhone = NumberPhone.replaceFirst("8", "7");
+                numberPhone = numberPhone.replaceFirst("8", "7");
             }
             Pattern patternNum = Pattern.compile("^(?<allNumberPhone>(?<codeCountry>\\d)" +
                     "(?<codeOperatora>\\d{3})(?<numPhone>\\d{7}))$");
-            Matcher matcher = patternNum.matcher(NumberPhone);
+            Matcher matcher = patternNum.matcher(numberPhone);
             if (!matcher.find()) {
                 System.err.printf("Номер телефона состоит: %d цифра обозначающая страну " +
                         "%d цифры обозначающие оператора связи, %d цифр номер телефона.%n", 1, 3, 7);
-                NumberPhone = repeatPhoneNumber();
+                numberPhone = repeatPhoneNumber();
             } else {
                 break;
             }
         }
-        return NumberPhone;
-    }
-
-    private static String repeatComand() {
-        String text;
-        do {
-            System.out.println("Повторите ввод команды. Введите доступную команду из списку:" +
-                    "ADD, LIST или EXIT.");
-            text = scanner.nextLine().toUpperCase();
-        } while (!isComand(text));
-        return text;
+        return numberPhone;
     }
 
     private static String repeatPhoneNumber() {
@@ -151,22 +148,13 @@ public class Main {
         return number;
     }
 
-    private static String askUserForName() {
-        Pattern patternName = Pattern.compile("^(?<name>[\\dА-Яа-яёй]{2,15})\\s?" +
-                "(?<partonymic>[\\dА-Яа-яёй]{2,15})?\\s?(?<surname>[\\dА-Яа-яёй]{2,15})?$");
-        String text;
+    private static String repeatNameContact() {
         System.out.printf("Введите наименование контакта. Фрагменты имя, отчество и фамилия " +
                 "могут занимать от 2 до 15 символов каждая.%nИмя должно быть обязательным.%n");
-        while (true) {
+        String text;
+        do {
             text = scanner.nextLine().trim();
-            Matcher matcherName = patternName.matcher(text);
-            if (matcherName.find()) {
-                break;
-            } else {
-                System.err.printf("В наименовании контакта могут присутствовать только " +
-                        "следующие символы: A-Za-zА-Яа-яёй0-9_.%n Повторите ввод заново.%n%n");
-            }
-        }
+        } while (!isNameContact(text));
         return text;
     }
 }
