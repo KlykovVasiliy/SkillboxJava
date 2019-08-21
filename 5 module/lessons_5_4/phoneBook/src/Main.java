@@ -83,12 +83,11 @@ public class Main {
     }
 
     private static boolean isPhoneFound(String phone) {
-        boolean isPhone = false;
         if (phoneBook.containsValue(phone)) {
             System.err.println("В телефонной книге уже присутствует контакт с таким же номером.");
-            isPhone = true;
+            return true;
         }
-        return isPhone;
+        return false;
     }
 
     private static boolean isNameFound(String nameUser) {
@@ -102,7 +101,7 @@ public class Main {
 
     private static boolean isComand(String comand) {
         String[] list = {"LIST"};
-        ArrayList<String> listComand = new ArrayList<>(Arrays.asList(list));
+        List<String> listComand = Arrays.asList(list);
         String comandTemp = comand.toUpperCase();
         return listComand.contains(comandTemp);
     }
