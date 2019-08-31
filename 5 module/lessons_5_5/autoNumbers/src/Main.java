@@ -29,18 +29,7 @@ public class Main {
         }
     }
 
-    private static void generationNumbers() {
-        System.out.println("Генерация блатных номеров начата.");
-        while (listAutoNumbers.size() < countWithoutRegions) {
-            String number = getNumberAuto();
-            if (isThievesNumber(number)) {
-                if (!listAutoNumbers.contains(number)) {
-                    listAutoNumbers.add(number);
-                }
-            }
-        }
-        System.out.printf("Генерация блатных номеров завершена.%n");
-    }
+
 
     private static String getNumberAuto() {
         StringBuilder builder = new StringBuilder();
@@ -61,28 +50,6 @@ public class Main {
         return builder.toString();
     }
 
-    private static void addRegion(String number) {
-        for (int i = 1; i <= regions; i++) {
-            String text;
-            if (i < 10) {
-                text = number + " " + i;
-                text = text.replace(" ", " 0");
-            } else {
-                text = number + " " + i;
-            }
-            listAutoNumbers.add(text);
-        }
-
-    }
-
-    private static boolean isThievesNumber (String text) {
-        String[] list = {"ААА", "АММ", "АМО", "АМР", "ВМР", "ВОО", "ЕКХ", "ЕРЕ", "ККХ", "ТМР",
-                "КМР", "КОО", "МММ", "ММР", "МОО", "ООО", "РМР", "САС", "СОО", "ССС", "ХКХ"};
-        List<String> listThievesNumbers = Arrays.asList(list);
-        String letters = text.replaceAll("[^АВЕКМНОРСТХУ]", "");
-        return listThievesNumbers.contains(letters);
-    }
-
     private static String inputNumberForSearch() {
         Pattern pattern = Pattern.compile("^[АВЕКМНОРСТХУ]\\d{3}[АВЕКМНОРСТХУ]{2}\\s\\d{2,3}");
         Scanner scanner = new Scanner(System.in);
@@ -97,6 +64,41 @@ public class Main {
             }
         }
         return number;
+    }
+
+    private static boolean isThievesNumber (String text) {
+        String[] list = {"ААА", "АММ", "АМО", "АМР", "ВМР", "ВОО", "ЕКХ", "ЕРЕ", "ККХ", "ТМР",
+                "КМР", "КОО", "МММ", "ММР", "МОО", "ООО", "РМР", "САС", "СОО", "ССС", "ХКХ"};
+        List<String> listThievesNumbers = Arrays.asList(list);
+        String letters = text.replaceAll("[^АВЕКМНОРСТХУ]", "");
+        return listThievesNumbers.contains(letters);
+    }
+
+    private static void generationNumbers() {
+        System.out.println("Генерация блатных номеров начата.");
+        while (listAutoNumbers.size() < countWithoutRegions) {
+            String number = getNumberAuto();
+            if (isThievesNumber(number)) {
+                if (!listAutoNumbers.contains(number)) {
+                    listAutoNumbers.add(number);
+                }
+            }
+        }
+        System.out.printf("Генерация блатных номеров завершена.%n");
+    }
+
+    private static void addRegion(String number) {
+        for (int i = 1; i <= regions; i++) {
+            String text;
+            if (i < 10) {
+                text = number + " " + i;
+                text = text.replace(" ", " 0");
+            } else {
+                text = number + " " + i;
+            }
+            listAutoNumbers.add(text);
+        }
+
     }
 
     private static void searchConsistent(String number) {
