@@ -7,24 +7,29 @@ public class Main {
     private static int regions = 197;
     private static int countWithoutRegions = sizeListNumbers / regions;
     private static ArrayList<String> listAutoNumbers = new ArrayList<>(sizeListNumbers);
+    private static HashSet<String> setWithoutRegions = new HashSet<>(countWithoutRegions);
 
     public static void main(String[] args) {
         generationNumbers();
-        for (int i = 0; i < countWithoutRegions; i++) {
-            addRegion(listAutoNumbers.get(i));
+        for (String number : setWithoutRegions) {
+            addRegion(number);
         }
-        listAutoNumbers.subList(0, countWithoutRegions).clear();
-        System.out.printf("Количество автомобильных номеров в базе %d%n", listAutoNumbers.size());
+        Collections.sort(listAutoNumbers);
+        System.out.printf("Количество автомобильных номеров в базе: %d%n", listAutoNumbers.size());
 
         for(;;) {
             String number = inputNumberForSearch();
+            System.out.printf("Количество автомобильных номеров в списке: %d%n", listAutoNumbers.size());
             searchConsistent(number);                                           //последовательный поиск номера
+            System.out.printf("Количество автомобильных номеров в списке: %d%n", listAutoNumbers.size());
             searchBinary(number);                                               //бинарный поиск номера
 
             HashSet<String> hashSet = new HashSet<>(listAutoNumbers);
+            System.out.printf("%nКоличество автомобильных номеров во множестве: %d%n", hashSet.size());
             searchHashSet(hashSet, number);                                      //поиск по Хэшу
 
             TreeSet<String> treeSet = new TreeSet<>(listAutoNumbers);
+            System.out.printf("%nКоличество автомобильных номеров во множестве: %d%n", treeSet.size());
             searchTreeSet(treeSet, number);                                      //поиск по Хэш дереву
         }
     }
@@ -51,7 +56,7 @@ public class Main {
     }
 
     private static String inputNumberForSearch() {
-        Pattern pattern = Pattern.compile("^[АВЕКМНОРСТХУ]\\d{3}[АВЕКМНОРСТХУ]{2}\\s\\d{2,3}");
+        Pattern pattern = Pattern.compile("^[АВЕКМНОРСТХУ]\\d{3}[АВЕКМНОРСТХУ]{2}\\s\\d{2,3}$");
         Scanner scanner = new Scanner(System.in);
         String number;
         while (true) {
@@ -60,7 +65,12 @@ public class Main {
             number = scanner.nextLine().toUpperCase();
             Matcher matcher = pattern.matcher(number);
             if (matcher.find()) {
-                break;
+                String str = number.substring(0, number.indexOf(" ")).trim();
+                if (!setWithoutRegions.contains(str)) {
+                    System.out.println("Такого номера нет в списке. Повторите ввод.");
+                } else {
+                    break;
+                }
             }
         }
         return number;
@@ -76,12 +86,10 @@ public class Main {
 
     private static void generationNumbers() {
         System.out.println("Генерация блатных номеров начата.");
-        while (listAutoNumbers.size() < countWithoutRegions) {
+        while (setWithoutRegions.size() < countWithoutRegions) {
             String number = getNumberAuto();
             if (isThievesNumber(number)) {
-                if (!listAutoNumbers.contains(number)) {
-                    listAutoNumbers.add(number);
-                }
+                setWithoutRegions.add(number);
             }
         }
         System.out.printf("Генерация блатных номеров завершена.%n");
@@ -91,53 +99,52 @@ public class Main {
         for (int i = 1; i <= regions; i++) {
             String text;
             if (i < 10) {
-                text = number + " " + i;
-                text = text.replace(" ", " 0");
+                text = String.format("%s %d02", number, i);
             } else {
-                text = number + " " + i;
+                text = String.format("%s %d", number, i);
             }
             listAutoNumbers.add(text);
         }
-
     }
 
     private static void searchConsistent(String number) {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         if (listAutoNumbers.contains(number)) {
-            long ducation = System.currentTimeMillis() - start;
-            System.out.printf("Поиск автомобильного номера прямым перебором занял %dмс.%n", ducation);
+            long ducation = System.nanoTime() - start;
+            System.out.printf("Автомобильный номер найден прямым перебором за %dнс.%n"
+                    , ducation);
         } else {
             System.out.println("Введенный номер не является блатным или отсутствует в списке.");
         }
     }
 
     private static void searchBinary (String number) {
-        Collections.sort(listAutoNumbers);
-        long start = System.currentTimeMillis();
-        int index = Collections.binarySearch(listAutoNumbers, number);
-        if (index >= 0) {
-            long ducation = System.currentTimeMillis() - start;
-            System.out.printf("Поиск автомобильного номера бинарным поиском занял %dмс.%n", ducation);
+        if (listAutoNumbers.contains(number)) {
+            long start = System.nanoTime();
+            int index = Collections.binarySearch(listAutoNumbers, number);
+            long ducation = System.nanoTime() - start;
+            System.out.printf("Автомобильный номер найден бинарным поиском за %dнс.%n"
+                    , ducation);
         } else {
             System.out.println("Введенный номер не является блатным или отсутствует в списке.");
         }
     }
 
     private static void searchHashSet(HashSet<String> hashSet, String number) {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         if (hashSet.contains(number)) {
-            long ducation = System.currentTimeMillis() - start;
-            System.out.printf("Поиск автомобильного номера по ХЭШу занял %dмс.%n", ducation);
+            long ducation = System.nanoTime() - start;
+            System.out.printf("Поиск автомобильного номера по ХЭШу занял %dнс.%n", ducation);
         } else {
             System.out.println("Введенный номер не является блатным или отсутствует в списке.");
         }
     }
 
     private static void searchTreeSet(TreeSet<String> treeSet, String number) {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         if (treeSet.contains(number)) {
-            long ducation = System.currentTimeMillis() - start;
-            System.out.printf("Поиск автомобильного номера по упорядоченному ХЭШу занял %dмс.%n",
+            long ducation = System.nanoTime() - start;
+            System.out.printf("Поиск автомобильного номера по упорядоченному множеству занял %dнс.%n",
                     ducation);
         } else {
             System.out.println("Введенный номер не является блатным или отсутствует в списке.");
