@@ -34,8 +34,6 @@ public class Main {
         }
     }
 
-
-
     private static String getNumberAuto() {
         StringBuilder builder = new StringBuilder();
         Random random = new Random();
