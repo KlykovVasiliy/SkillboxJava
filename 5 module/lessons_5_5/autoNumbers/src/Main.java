@@ -17,18 +17,19 @@ public class Main {
         Collections.sort(listAutoNumbers);
         System.out.printf("Количество автомобильных номеров в базе: %d%n", listAutoNumbers.size());
 
+        String number;
+        HashSet<String> hashSet = new HashSet<>(listAutoNumbers);
+        TreeSet<String> treeSet = new TreeSet<>(listAutoNumbers);
         for(;;) {
-            String number = inputNumberForSearch();
+            number = inputNumberForSearch();
             System.out.printf("Количество автомобильных номеров в списке: %d%n", listAutoNumbers.size());
             searchConsistent(number);                                           //последовательный поиск номера
             System.out.printf("Количество автомобильных номеров в списке: %d%n", listAutoNumbers.size());
             searchBinary(number);                                               //бинарный поиск номера
 
-            HashSet<String> hashSet = new HashSet<>(listAutoNumbers);
             System.out.printf("%nКоличество автомобильных номеров во множестве: %d%n", hashSet.size());
             searchHashSet(hashSet, number);                                      //поиск по Хэшу
 
-            TreeSet<String> treeSet = new TreeSet<>(listAutoNumbers);
             System.out.printf("%nКоличество автомобильных номеров во множестве: %d%n", treeSet.size());
             searchTreeSet(treeSet, number);                                      //поиск по Хэш дереву
         }
@@ -95,12 +96,7 @@ public class Main {
 
     private static void addRegion(String number) {
         for (int i = 1; i <= regions; i++) {
-            String text;
-            if (i < 10) {
-                text = String.format("%s %d02", number, i);
-            } else {
-                text = String.format("%s %d", number, i);
-            }
+            String text = String.format("%s %02d", number, i);
             listAutoNumbers.add(text);
         }
     }
@@ -111,21 +107,15 @@ public class Main {
             long ducation = System.nanoTime() - start;
             System.out.printf("Автомобильный номер найден прямым перебором за %dнс.%n"
                     , ducation);
-        } else {
-            System.out.println("Введенный номер не является блатным или отсутствует в списке.");
         }
     }
 
     private static void searchBinary (String number) {
-        if (listAutoNumbers.contains(number)) {
-            long start = System.nanoTime();
-            int index = Collections.binarySearch(listAutoNumbers, number);
-            long ducation = System.nanoTime() - start;
-            System.out.printf("Автомобильный номер найден бинарным поиском за %dнс.%n"
-                    , ducation);
-        } else {
-            System.out.println("Введенный номер не является блатным или отсутствует в списке.");
-        }
+        long start = System.nanoTime();
+        int index = Collections.binarySearch(listAutoNumbers, number);
+        long ducation = System.nanoTime() - start;
+        System.out.printf("Автомобильный номер %s найден бинарным поиском за %dнс.%n"
+                , listAutoNumbers.get(index), ducation);
     }
 
     private static void searchHashSet(HashSet<String> hashSet, String number) {
@@ -133,8 +123,6 @@ public class Main {
         if (hashSet.contains(number)) {
             long ducation = System.nanoTime() - start;
             System.out.printf("Поиск автомобильного номера по ХЭШу занял %dнс.%n", ducation);
-        } else {
-            System.out.println("Введенный номер не является блатным или отсутствует в списке.");
         }
     }
 
@@ -144,8 +132,6 @@ public class Main {
             long ducation = System.nanoTime() - start;
             System.out.printf("Поиск автомобильного номера по упорядоченному множеству занял %dнс.%n",
                     ducation);
-        } else {
-            System.out.println("Введенный номер не является блатным или отсутствует в списке.");
         }
     }
 }
