@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1bde3c5-4455-4b74-8b2f-2050e06f95d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../6 module/bankAccount/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../6 module/bankAccount/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../6 module/bankAccount/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../6 module/bankAccount/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../6 module/bankAccount/bankAccount.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../6 module/bankAccount/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/autoNumbers/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/autoNumbers/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../6 module/bankAccount/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../6 module/lessons_6_1/bankAccount/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../6 module/bankAccount/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../6 module/lessons_6_1/bankAccount/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../6 module/bankAccount/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../6 module/lessons_6_1/bankAccount/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../6 module/bankAccount/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../6 module/lessons_6_1/bankAccount/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../6 module/bankAccount/bankAccount.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../6 module/lessons_6_1/bankAccount/bankAccount.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../6 module/bankAccount/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../6 module/lessons_6_1/bankAccount/src/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +26,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2278">
-              <caret line="134" column="9" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
+            <state relative-caret-position="2363">
+              <caret line="139" column="9" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,8 +78,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -152,7 +151,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1380" height="735" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23560606" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23939393" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -161,7 +160,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3986711" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4883721" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3986711" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -190,8 +189,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2278">
-          <caret line="134" column="9" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
+        <state relative-caret-position="2363">
+          <caret line="139" column="9" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

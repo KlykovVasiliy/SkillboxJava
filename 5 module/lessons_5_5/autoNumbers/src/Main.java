@@ -107,15 +107,37 @@ public class Main {
             long ducation = System.nanoTime() - start;
             System.out.printf("Автомобильный номер найден прямым перебором за %dнс.%n"
                     , ducation);
+        } else {
+            System.out.println("Автомобильный номер не найден в списке.");
         }
     }
 
-    private static void searchBinary (String number) {
+    private static void searchBinary (String number) {      //number искомый
         long start = System.nanoTime();
-        int index = Collections.binarySearch(listAutoNumbers, number);
-        long ducation = System.nanoTime() - start;
-        System.out.printf("Автомобильный номер %s найден бинарным поиском за %dнс.%n"
-                , listAutoNumbers.get(index), ducation);
+        int minIndex = 0;
+        int maxIndex = listAutoNumbers.size() - 1;
+        int middleIndex;
+        int numberComparison;
+        String middleValue;
+
+        while (maxIndex >= minIndex) {
+            middleIndex = (minIndex + maxIndex) / 2;
+            middleValue = listAutoNumbers.get(middleIndex);
+            numberComparison = number.compareTo(middleValue);
+            if (numberComparison < 0) {
+                maxIndex = middleIndex - 1;
+            } else if (numberComparison > 0) {
+                minIndex = middleIndex + 1;
+            } else if (number.compareTo(middleValue) == 0) {
+                long ducation = System.nanoTime() - start;
+                System.out.printf("Автомобильный номер найден бинарным поиском за %dнс.%n"
+                        , ducation);
+                break;
+            }
+        }
+        if (minIndex > maxIndex) {
+            System.out.println("Автомобильный номер не найден в списке.");
+        }
     }
 
     private static void searchHashSet(HashSet<String> hashSet, String number) {
@@ -123,6 +145,8 @@ public class Main {
         if (hashSet.contains(number)) {
             long ducation = System.nanoTime() - start;
             System.out.printf("Поиск автомобильного номера по ХЭШу занял %dнс.%n", ducation);
+        } else {
+            System.out.println("Автомобильный номер не найден в списке.");
         }
     }
 
@@ -132,6 +156,8 @@ public class Main {
             long ducation = System.nanoTime() - start;
             System.out.printf("Поиск автомобильного номера по упорядоченному множеству занял %dнс.%n",
                     ducation);
+        } else {
+            System.out.println("Автомобильный номер не найден в списке.");
         }
     }
 }
