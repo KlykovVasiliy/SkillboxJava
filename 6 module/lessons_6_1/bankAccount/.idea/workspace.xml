@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1238eeeb-5cf6-4e3d-b05d-405c1c8f1d40" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/accounts/CardAccoutn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/accounts/CheckingAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/accounts/DepositAccount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accounts/CardAccoutn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/accounts/CardAccoutn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accounts/CheckingAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/accounts/CheckingAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accounts/DepositAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/accounts/DepositAccount.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,16 +23,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+            <state relative-caret-position="204">
+              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getMoneyOfOptional#0;class#BankAccount#0" />
-                <element signature="method#inputAmountOfMoney#0;class#BankAccount#0" />
-                <element signature="method#isMoneyFormat#0;class#BankAccount#0" />
-                <element signature="method#addMoney#0;class#BankAccount#0" />
-                <element signature="method#deleteMoney#0;class#BankAccount#0" />
-                <element signature="method#outputBalance#0;class#BankAccount#0" />
               </folding>
             </state>
           </provider>
@@ -44,6 +37,17 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
               <caret line="1" selection-start-line="1" selection-end-line="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#326#327#0" expanded="true" />
+                <element signature="e#354#355#0" expanded="true" />
+                <element signature="method#inputCommand#0;class#CheckingAccount#0" />
+                <element signature="method#isCommand#0;class#CheckingAccount#0" />
+                <element signature="method#inputAmountOfMoney#0;class#CheckingAccount#0" />
+                <element signature="method#isMoneyFormat#0;class#CheckingAccount#0" />
+                <element signature="e#2877#2878#0" expanded="true" />
+                <element signature="e#3029#3030#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,8 +55,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/accounts/DepositAccount.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="680">
+              <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+              <folding>
+                <element signature="e#248#249#0" expanded="true" />
+                <element signature="e#307#308#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -60,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/accounts/CardAccoutn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="272">
+              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -84,10 +92,10 @@
         <option value="$PROJECT_DIR$/src/BankAccount.java" />
         <option value="$PROJECT_DIR$/src/CardAccount.java" />
         <option value="$PROJECT_DIR$/src/DepositAccount.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/accounts/CheckingAccount.java" />
-        <option value="$PROJECT_DIR$/src/accounts/DepositAccount.java" />
         <option value="$PROJECT_DIR$/src/accounts/CardAccoutn.java" />
+        <option value="$PROJECT_DIR$/src/accounts/DepositAccount.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -109,8 +117,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -189,7 +197,7 @@
     <frame x="-7" y="0" width="1380" height="735" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30454546" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34469697" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -206,7 +214,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32890365" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -253,17 +261,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DepositAccount.java">
+    <entry file="file://$PROJECT_DIR$/src/DepositAccount.java" />
+    <entry file="file://$PROJECT_DIR$/src/CardAccount.java" />
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CardAccount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="204">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -271,36 +277,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#354#355#0" expanded="true" />
+            <element signature="method#inputCommand#0;class#CheckingAccount#0" />
+            <element signature="method#isCommand#0;class#CheckingAccount#0" />
+            <element signature="method#inputAmountOfMoney#0;class#CheckingAccount#0" />
+            <element signature="method#isMoneyFormat#0;class#CheckingAccount#0" />
+            <element signature="e#2877#2878#0" expanded="true" />
+            <element signature="e#3029#3030#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/accounts/DepositAccount.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="680">
+          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+          <folding>
+            <element signature="e#248#249#0" expanded="true" />
+            <element signature="e#307#308#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/accounts/CardAccoutn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getMoneyOfOptional#0;class#BankAccount#0" />
-            <element signature="method#inputAmountOfMoney#0;class#BankAccount#0" />
-            <element signature="method#isMoneyFormat#0;class#BankAccount#0" />
-            <element signature="method#addMoney#0;class#BankAccount#0" />
-            <element signature="method#deleteMoney#0;class#BankAccount#0" />
-            <element signature="method#outputBalance#0;class#BankAccount#0" />
-          </folding>
+        <state relative-caret-position="272">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
         </state>
       </provider>
     </entry>
