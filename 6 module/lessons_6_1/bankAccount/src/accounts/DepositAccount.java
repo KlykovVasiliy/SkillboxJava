@@ -39,7 +39,7 @@ public class DepositAccount extends CheckingAccount {
                 setScore(getScore() - money);
                 balance();
             } else {
-                System.out.printf("На расчетном счету недостаточно денежных средств для снятия.%n" +
+                System.err.printf("На расчетном счету недостаточно денежных средств для снятия.%n" +
                         "Баланс вашего счета составляет %.02f%n", getScore());
             }
         } else {
