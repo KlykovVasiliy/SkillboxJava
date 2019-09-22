@@ -8,15 +8,10 @@ import java.util.regex.Pattern;
 
 public class CheckingAccount {
     private static Scanner scanner = new Scanner(System.in);
+    private double balance = 0.00;
 
-    private double score = 0.00;
-
-    protected double getScore() {
-        return score;
-    }
-
-    protected void setScore(double score) {
-        this.score = score;
+    protected double getBalance() {
+        return balance;
     }
 
     public static String inputCommand() {
@@ -25,7 +20,7 @@ public class CheckingAccount {
                 "EXIT - завершение операций со счётом%nВведите нужную команду:%n");
         Pattern pattern = Pattern.compile("^[A-Z]{3,8}$");
         String text;
-        while(true) {
+        while (true) {
             text = scanner.nextLine();
             Matcher matcher = pattern.matcher(text);
             if (matcher.find()) {
@@ -50,9 +45,9 @@ public class CheckingAccount {
     public double inputAmountOfMoney() {
         String text;
         System.out.println("Введите сумму в денежном формате.");
-        while(true) {
+        while (true) {
             text = scanner.nextLine();
-            text = text.replace(",",".");
+            text = text.replace(",", ".");
             if (!isMoneyFormat(text)) {
                 System.err.println("Введена строка не в денежном формате, повторите ввод суммы.");
                 continue;
@@ -62,41 +57,49 @@ public class CheckingAccount {
         return Double.parseDouble(text);
     }
 
-    private static boolean isMoneyFormat (String money) {
+    private static boolean isMoneyFormat(String money) {
         Pattern pattern = Pattern.compile("^\\d+(\\.[\\d]{0,2})*$");
         Matcher matcher = pattern.matcher(money);
         return matcher.find();
     }
 
     public boolean isDeposit(double money) {
-        double moneyStart = getScore();
-        setScore(getScore() + money);
-        boolean isSuccess = false;
-        if (moneyStart < getScore()) {
-            isSuccess = true;
+        if (money < 0) {
+            System.err.println("Вы не можете внести на счет отрицательную сумму");
+            return false;
+        }
+        double moneyStart = balance;
+        balance += money;
+        if (moneyStart < balance) {
             System.out.printf("На ваш счёт поступило %.02f рубль(ей).%n", money);
+            printBalance();
+            return true;
         } else {
             System.err.println("Не удалось пополнить счёт.");
+            printBalance();
+            return false;
         }
-        balance();
-        return isSuccess;
     }
 
-    public boolean isWithdraw (double money) {              //снятие со счета
-        boolean isSuccess = false;
-        if (money <= getScore()) {
-            isSuccess = true;
-            setScore(getScore() - money);
+    public boolean isWithdraw(double money) {              //снятие со счета
+        if (money < 0) {
+            System.err.println("Вы не можете снять со счета отрицательную сумму");
+            return false;
+        }
+        if (money <= balance) {
+            balance -= money;
             System.out.printf("С вашего счёта было снято %.02f рубля(ей)%n", money);
-            balance();
+            printBalance();
+            return true;
         } else {
             System.err.printf("На расчетном счету недостаточно денежных средств для снятия.%n" +
-                    "Баланс вашего счета составляет %.02f%n", getScore());
+                            "Попытались снять %.02f, а баланс вашего счета составляет %.02f%n", money,
+                    balance);
+            return false;
         }
-        return isSuccess;
     }
 
-    public void balance () {                           //вывод информации о балансе
-        System.out.printf("Баланс вашего счёта составляет %.02f рубля(ей)%n", getScore());
+    public void printBalance() {                           //вывод информации о балансе
+        System.out.printf("Баланс вашего счёта составляет %.02f рубля(ей)%n", balance);
     }
 }
