@@ -10,10 +10,6 @@ public class CheckingAccount {
     private static Scanner scanner = new Scanner(System.in);
     private double balance = 0.00;
 
-    protected double getBalance() {
-        return balance;
-    }
-
     public static String inputCommand() {
         System.out.printf("Доступные команды и обозначения:%nDEPOSIT - пополнить счёт%n" +
                 "BALANCE - отображение баланса счёта%nWITHDRAW - снятие денег со счёта%n" +
@@ -63,37 +59,30 @@ public class CheckingAccount {
         return matcher.find();
     }
 
-    public boolean isDeposit(double money) {
-        if (money < 0) {
-            System.err.println("Вы не можете внести на счет отрицательную сумму");
-            return false;
-        }
-        double moneyStart = balance;
-        balance += money;
-        if (moneyStart < balance) {
+    public boolean deposit(double money) {
+        if (money > 0) {
+            balance += money;
             System.out.printf("На ваш счёт поступило %.02f рубль(ей).%n", money);
             printBalance();
             return true;
         } else {
-            System.err.println("Не удалось пополнить счёт.");
+            System.err.println("Не удалось пополнить счёт. Значение вносимых средств должно " +
+                    "быть больше 0");
             printBalance();
             return false;
         }
     }
 
-    public boolean isWithdraw(double money) {              //снятие со счета
-        if (money < 0) {
-            System.err.println("Вы не можете снять со счета отрицательную сумму");
-            return false;
-        }
-        if (money <= balance) {
+    public boolean withdraw(double money) {              //снятие со счета
+        if (balance >= money && money >= 0) {
             balance -= money;
             System.out.printf("С вашего счёта было снято %.02f рубля(ей)%n", money);
             printBalance();
             return true;
         } else {
-            System.err.printf("На расчетном счету недостаточно денежных средств для снятия.%n" +
-                            "Попытались снять %.02f, а баланс вашего счета составляет %.02f%n", money,
+            System.err.printf("Вы не можете снять отрицательную сумму либо на расчетном счету " +
+                            "недостаточно денежных средств для снятия.%nПопытались снять %.02f, " +
+                            "а баланс вашего счета составляет %.02f%n", money,
                     balance);
             return false;
         }

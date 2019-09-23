@@ -8,22 +8,22 @@ public class Main {
         DepositAccount depositAccount = new DepositAccount();
         CardAccount cardAccoutn = new CardAccount();
 
-        account.isDeposit(150);
-        account.isWithdraw(200);
-        account.isWithdraw(100);
-        account.isDeposit(-5);
-        account.isWithdraw(-10);
+        account.deposit(150);
+        account.withdraw(200);
+        account.withdraw(100);
+        account.deposit(-5);
+        account.withdraw(-10);
         System.out.println("================================================");
 
-        depositAccount.isDeposit(500);
-        depositAccount.isWithdraw(100);
-        depositAccount.isDeposit(0);
-        depositAccount.isDeposit(-5);
+        depositAccount.deposit(500);
+        depositAccount.withdraw(100);
+        depositAccount.deposit(0);
+        depositAccount.deposit(-5);
         System.out.println("================================================");
 
-        cardAccoutn.isDeposit(1000);
-        cardAccoutn.isWithdraw(200);
-        cardAccoutn.isDeposit(-50);
-        cardAccoutn.isWithdraw(-10);
+        cardAccoutn.deposit(1000);
+        cardAccoutn.withdraw(200);
+        cardAccoutn.deposit(-50);
+        cardAccoutn.withdraw(-10);
     }
 }

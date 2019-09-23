@@ -7,32 +7,31 @@ public class DepositAccount extends CheckingAccount {
     private Calendar aMounthLater = Calendar.getInstance();
     private Calendar dateDeleteMoney;
 
-    private boolean isWithdraw() {
-        return aMounthLater.before(dateDeleteMoney);
+    private boolean isMonthPassed() {
+        return aMounthLater.after(dateDeleteMoney);
     }
 
     @Override
-    public boolean isDeposit(double money) {
-        boolean isAddDate = super.isDeposit(money);
+    public boolean deposit(double money) {
+        boolean isAddDate = super.deposit(money);
         if (isAddDate) {
             aMounthLater.add(Calendar.MONTH, 1);        //месяц спустя когда можно снимать деньги
-            System.out.println(aMounthLater.getTime());
+            System.out.println("Денежные средства можете снять не раньше " +
+                    aMounthLater.getTime());
         }
         return isAddDate;
     }
 
     @Override
-    public boolean isWithdraw(double money) {
-        boolean isWithdrawMoney = super.isWithdraw(money);
-        if (isWithdrawMoney) {
-            dateDeleteMoney = Calendar.getInstance();           //дата когда была попытка снять деньги
-            if (!isWithdraw()) {
-                System.err.printf("Деньги будут возвращены обратно на счёт, т.к. 1 месяц после " +
-                        "последнего пополнения %s ещё не прошел%n", calendarStart.getTime());
-                isDeposit(money);
-                return false;
-            }
+    public boolean withdraw(double money) {
+        dateDeleteMoney = Calendar.getInstance();
+        if (isMonthPassed()) {
+            System.err.printf("В снятии денег со счёта будет отказано, т.к. 1 месяц после " +
+                            "последнего пополнения %s ещё не прошел%nТекущая дата %s%n",
+                    calendarStart.getTime(), Calendar.getInstance().getTime());
+            return false;
+        } else {
+            return super.withdraw(money);
         }
-        return isWithdrawMoney;
     }
 }
