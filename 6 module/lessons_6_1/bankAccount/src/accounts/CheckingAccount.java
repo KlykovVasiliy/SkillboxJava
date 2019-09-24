@@ -88,7 +88,7 @@ public class CheckingAccount {
         }
     }
 
-    public void printBalance() {                           //вывод информации о балансе
+    private void printBalance() {                           //вывод информации о балансе
         System.out.printf("Баланс вашего счёта составляет %.02f рубля(ей)%n", balance);
     }
 }
