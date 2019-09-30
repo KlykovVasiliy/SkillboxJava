@@ -1,6 +1,6 @@
 package clients;
 
-public class LegalEntity extends IndividualClient {
+public class LegalEntity extends Client {
     private static final double COMISSION = 0.01;
 
     @Override

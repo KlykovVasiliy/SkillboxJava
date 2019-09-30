@@ -1,12 +1,13 @@
 import clients.Client;
 import clients.IndividualClient;
+import clients.IndividualEntrepreneur;
 import clients.LegalEntity;
 
 public class Main {
     public static void main(String[] args) {
         Client fizik = new IndividualClient();
         Client yurik = new LegalEntity();
-        Client indivPredpri = new IndividualClient();
+        Client indivPredpri = new IndividualEntrepreneur();
 
         fizik.balance();
         fizik.replenish(10);
