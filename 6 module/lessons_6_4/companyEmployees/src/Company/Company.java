@@ -62,7 +62,7 @@ public class Company {
                 ((Clerk) ob).setSalary(25000.0);
             }
         }
-        Arrays.sort(salaryComparator);
+//        Arrays.sort(salaryComparator);
 //        Collections.sort(listEmployeesCompany, salaryComparator);
     }
 
