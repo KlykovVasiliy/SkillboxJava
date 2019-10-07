@@ -1,15 +1,13 @@
 package Company;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class Company {
     private int incomeCompany = 0;
     private int countTopManager = 0;
     protected final static double PERSENTAGE_OF_INCOME_COMPANY = 0.05;
 
-    private ArrayList<Company> listEmployeesCompany = new ArrayList<>(270);
+    private ArrayList<AbstractEmployees> listEmployeesCompany = new ArrayList<>(270);
     private SalaryComparator salaryComparator = new SalaryComparator();
 
 
@@ -50,8 +48,8 @@ public class Company {
         for (Object ob : listEmployeesCompany) {
             if (ob instanceof TopManager) {
                 int teenMillions = 10000000;
-                if (incomeCompany > teenMillions) {
-                    ((TopManager) ob).setSalary(incomeCompany * PERSENTAGE_OF_INCOME_COMPANY /
+                if (getIncomeCompany() > teenMillions) {
+                    ((TopManager) ob).setSalary(getIncomeCompany() * PERSENTAGE_OF_INCOME_COMPANY /
                             countTopManager + 40000.0);
                 } else {
                     ((TopManager) ob).setSalary(40000.0);
@@ -62,8 +60,7 @@ public class Company {
                 ((Clerk) ob).setSalary(25000.0);
             }
         }
-//        Arrays.sort(salaryComparator);
-//        Collections.sort(listEmployeesCompany, salaryComparator);
+        listEmployeesCompany.sort(salaryComparator);
     }
 
 

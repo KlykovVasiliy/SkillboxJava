@@ -1,5 +1,7 @@
 package Company;
 
+
+
 public class SalesMan extends AbstractEmployees {
     private int amountSales = sales();
     private double salary = 0.0;

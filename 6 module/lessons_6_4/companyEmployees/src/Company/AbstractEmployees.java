@@ -10,6 +10,4 @@ public abstract class AbstractEmployees extends Company implements Employee {
     public String getName() {
         return name;
     }
-
-
 }

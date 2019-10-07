@@ -16,3 +16,4 @@ public class SalaryComparator implements Comparator<AbstractEmployees> {
 //        return 0;
     }
 }
+
