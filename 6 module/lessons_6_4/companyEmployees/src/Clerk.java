@@ -1,11 +1,8 @@
-package Company;
-
-public class TopManager extends AbstractEmployees {
+public class Clerk extends AbstractEmployees {
     private double salary = 0.0;
 
-    public TopManager(String name) {
+    public Clerk(String name) {
         super(name);
-        setCountTopManager();
     }
 
     protected void setSalary(double salary) {

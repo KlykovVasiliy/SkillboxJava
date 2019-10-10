@@ -1,18 +1,20 @@
-package Company;
-
-
-
 public class SalesMan extends AbstractEmployees {
-    private int amountSales = sales();
-    private double salary = 0.0;
+    private int amountSales;
+    private double salary;
+    private final static double PERSENTAGE_OF_SALES = 0.05;
+
 
     public SalesMan(String name) {
         super(name);
-        increaseIncomeCompany(amountSales);                             //не происходит пополнение бюджета компании
-        salary = amountSales * PERSENTAGE_OF_INCOME_COMPANY;
+        amountSales = sales();
+        salary = amountSales * PERSENTAGE_OF_SALES;
     }
 
-    protected void setSalary(double salary) {
+    public double getSales() {
+        return amountSales;
+    }
+
+    public void setSalary(double salary) {
         this.salary += salary;
     }
 
