@@ -5,6 +5,7 @@ public class Clerk extends AbstractEmployees {
         super(name);
     }
 
+    @Override
     protected void setSalary(double salary) {
         this.salary = salary;
     }

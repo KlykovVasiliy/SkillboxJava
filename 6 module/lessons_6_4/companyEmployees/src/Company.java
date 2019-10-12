@@ -4,22 +4,12 @@ import java.util.Comparator;
 public class Company {
     private int incomeCompany;
     private int countTopManager = 0;
-    private final static double PERSENTAGE_OF_INCOME_COMPANY = 0.05;
 
     private ArrayList<AbstractEmployees> listEmployeesCompany = new ArrayList<>(270);
     private Comparator<AbstractEmployees> comparator = new ComparatorSalary().thenComparing
             (new ComparatorName());
-    private ArrayList<Employee> list = new ArrayList<>();
 
-    public int getCountTopManager() {       //позже можно убрать
-        return countTopManager;
-    }
-
-    public int getIncomeCompany() {
-        return incomeCompany;
-    }
-
-    public void increaseIncomeCompany(AbstractEmployees employee, double income) {
+    private void increaseIncomeCompany(AbstractEmployees employee, double income) {
         if (employee instanceof SalesMan) {
             incomeCompany += income;
         } else {
@@ -46,20 +36,21 @@ public class Company {
     }
 
     private void setSalaryEmployees() {
-        for (Object ob : listEmployeesCompany) {
+        for (AbstractEmployees ob : listEmployeesCompany) {
             if (ob instanceof TopManager) {
                 int teenMillions = 10000000;
                 if (incomeCompany > teenMillions) {
-                    ((TopManager) ob).setSalary(incomeCompany * PERSENTAGE_OF_INCOME_COMPANY /
+                    double persentageOfIncomeCompany = 0.05;
+                    ob.setSalary(incomeCompany * persentageOfIncomeCompany /
                             countTopManager + 40000.0);
                 } else {
-                    ((TopManager) ob).setSalary(40000.0);
+                    ob.setSalary(40000.0);
                 }
             } else if (ob instanceof SalesMan) {
-                ((SalesMan) ob).setSalary(((SalesMan) ob).getMonthSalary() + 30000.0);
+                ob.setSalary(ob.getMonthSalary() + 30000.0);
 
             } else if (ob instanceof Clerk) {
-                ((Clerk) ob).setSalary(25000.0);
+                ob.setSalary(25000.0);
             }
         }
         listEmployeesCompany.sort(comparator);
@@ -76,38 +67,25 @@ public class Company {
     }
 
     public void printListEmployeesCompany() {
-        for (Object ob : listEmployeesCompany) {
-            if (ob instanceof TopManager) {
-                System.out.println(((TopManager) ob).getName() + " " + ((TopManager) ob).getMonthSalary());
-            } else if (ob instanceof SalesMan) {
-                System.out.println(((SalesMan) ob).getName() + " " + ((SalesMan) ob).getMonthSalary());
-            } else if (ob instanceof Clerk) {
-                System.out.println(((Clerk) ob).getName() + " " + ((Clerk) ob).getMonthSalary());
-            }
+        for (AbstractEmployees ob : listEmployeesCompany) {
+            System.out.println(ob.getName() + " " + ob.getMonthSalary());
         }
     }
 
     public ArrayList<Employee> getTopSalaryStaff(int count) {
-        list.clear();
-        int topSalaryStart = listEmployeesCompany.size() - 1;
-        for (int i = topSalaryStart; i > topSalaryStart - count; i--) {
-            Object ob = listEmployeesCompany.get(i);
-            if (ob instanceof Employee) {
-                Employee employee = (Employee) ob;
-                list.add(employee);
-            }
+        ArrayList<Employee> list = new ArrayList<>();
+        int topSalaryStart = listEmployeesCompany.size();
+        for (AbstractEmployees ob : listEmployeesCompany.subList(topSalaryStart - count,
+                topSalaryStart - 1)) {
+            list.add((Employee) ob);
         }
         return list;
     }
 
     public ArrayList<Employee> getLowestSalaryStaff(int count) {
-        list.clear();
-        for (int i = 0; i < count; i++) {
-            Object ob = listEmployeesCompany.get(i);
-            if (ob instanceof Employee) {
-                Employee employee = (Employee) ob;
-                list.add(employee);
-            }
+        ArrayList<Employee> list = new ArrayList<>();
+        for (AbstractEmployees ob : listEmployeesCompany.subList(0, count - 1)) {
+                list.add((Employee) ob);
         }
         return list;
     }

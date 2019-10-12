@@ -5,6 +5,7 @@ public class TopManager extends AbstractEmployees {
         super(name);
     }
 
+    @Override
     public void setSalary(double salary) {
         this.salary = salary;
     }

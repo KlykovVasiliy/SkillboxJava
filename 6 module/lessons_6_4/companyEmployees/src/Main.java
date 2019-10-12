@@ -7,8 +7,6 @@ public class Main {
 
         //наём 270 сотрудников
         company.recruitEmployees(10, 170, 90);
-        System.out.println(company.getIncomeCompany());
-        System.out.println(company.getCountTopManager());
 
         System.out.println("Список сотрудников организации.");
         company.printListEmployeesCompany();
