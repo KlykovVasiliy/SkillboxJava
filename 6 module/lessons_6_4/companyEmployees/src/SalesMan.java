@@ -30,4 +30,9 @@ public class SalesMan extends AbstractEmployees {
     public double getMonthSalary() {
         return salary;
     }
+
+    @Override
+    public double getEmployeeRevenue() {
+        return amountSales;
+    }
 }

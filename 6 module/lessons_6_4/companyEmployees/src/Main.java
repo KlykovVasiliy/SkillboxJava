@@ -1,9 +1,9 @@
-import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         Company company = new Company();
-        ArrayList<Employee> list;
+        List<AbstractEmployees> list;
 
         //наём 270 сотрудников
         company.recruitEmployees(10, 170, 90);
@@ -32,5 +32,7 @@ public class Main {
                 company.fireEmployees();
             }
         }
+//        System.out.println(company.incomeCompany);                                                  //прежний метод
+        System.out.println(company.getIncomeCompany());
     }
 }
