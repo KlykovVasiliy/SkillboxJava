@@ -3,13 +3,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Company {
-//    public int incomeCompany = 0;
-    private int countTopManager = 0;
     private int countSalesMan = 0;
 
-    private void setCountTopManager(int count) {
-        this.countTopManager = count;
-    }
+    private List<AbstractEmployees> listEmployeesCompany = new ArrayList<>(270);
+    private Comparator<AbstractEmployees> comparator = new ComparatorSalary().thenComparing
+            (new ComparatorName());
 
     private void setCountSalesMan(int count) {
         if (count > 0) {
@@ -20,70 +18,53 @@ public class Company {
         }
     }
 
-    public int getIncomeCompany() {                                                                 //после промежуточной проверки
-        int income = 0;                                                                             //будет заменен на private
-        for (Employee employee : listEmployeesCompany) {
-            income += employee.getEmployeeRevenue();
-        }
-        return  income;
-    }
-
     private int getCountSalesMan() {
         return countSalesMan;
     }
 
-    private List<AbstractEmployees> listEmployeesCompany = new ArrayList<>(270);
-    private Comparator<AbstractEmployees> comparator = new ComparatorSalary().thenComparing
-            (new ComparatorName());
-
-//    private void increaseIncomeCompany(AbstractEmployees employee, double income) {
-//        if (employee instanceof SalesMan) {                                                         //заменить instanceof
-//            incomeCompany += income;
-//        } else {
-//            System.err.println("Доход в фирму могут приносить только менеджеры по прадажам.");
-//        }
-//    }
+    private int getIncomeCompany() {
+        int income = 0;
+        for (Employee employee : listEmployeesCompany) {
+            income += employee.getEmployeeRevenue();
+        }
+        return income;
+    }
 
     public void recruitEmployees(int countManager, int salesManager, int clearkMan) {
         for (int i = 0; i < countManager; i++) {
             TopManager topManager = new TopManager("topManager m" + i);
+            double salaryManagerWithoutPremia = 40000.0;
+            topManager.setSalary(salaryManagerWithoutPremia);
             listEmployeesCompany.add(topManager);
             for (int a = 1; a <= salesManager / countManager; a++) {
                 SalesMan salesMan = new SalesMan("salesMan s" + i + a);
+                double salarySalesMan = 30000.0;
+                salesMan.setSalary(salesMan.getMonthSalary() + salarySalesMan);
                 listEmployeesCompany.add(salesMan);
-//                increaseIncomeCompany(salesMan, salesMan.getSales());
             }
             for (int b = 1; b <= clearkMan / countManager; b++) {
                 Clerk cleark = new Clerk("cleark c" + i + b);
+                double salaryCleark = 25000.0;
+                cleark.setSalary(salaryCleark);
                 listEmployeesCompany.add(cleark);
             }
         }
-        setCountTopManager(countManager);
+        int teenMillions = 10000000;
+        if (getIncomeCompany() > teenMillions) {
+            salaryTopManager(countManager);
+        }
         setCountSalesMan(salesManager);
-        setSalaryEmployees();
+        listEmployeesCompany.sort(comparator);
     }
 
-    private void setSalaryEmployees() {
+    private void salaryTopManager(int countManager) {
+        double persentageOfIncomeCompany = 0.05;
+        double salaryTopManager = getIncomeCompany() * persentageOfIncomeCompany / countManager;
         for (AbstractEmployees ob : listEmployeesCompany) {
-            double deductionIncome;
-            if (ob instanceof TopManager) {                                                         //заменить instanceof
-                deductionIncome = 40000.0;
-                int teenMillions = 10000000;
-                if (getIncomeCompany() > teenMillions) {
-                    double persentageOfIncomeCompany = 0.05;
-                    deductionIncome = getIncomeCompany() * persentageOfIncomeCompany /
-                            countTopManager + 40000.0;
-                }
-                ob.setSalary(deductionIncome);
-            } else if (ob instanceof SalesMan) {                                                    //заменить instanceof
-                deductionIncome = ob.getMonthSalary() + 30000.0;
-                ob.setSalary(deductionIncome);
-            } else if (ob instanceof Clerk) {                                                       //заменить instanceof
-                deductionIncome = 25000.0;
-                ob.setSalary(deductionIncome);
+            if (ob instanceof TopManager) {
+                ob.setSalary(ob.getMonthSalary() + salaryTopManager);
             }
         }
-        listEmployeesCompany.sort(comparator);
     }
 
     private int randomEmployeeSelection() {
@@ -108,8 +89,6 @@ public class Company {
                 removeCount++;
             }
             if (removeCount >= listEmployeesCompany.size() / 10) {
-                System.out.printf("Увольнение 10 процентов сотрудников компании. " +
-                        "Уволено %d сотрудников.%n", removeCount);
                 break;
             }
         }
@@ -122,7 +101,6 @@ public class Company {
             income += salesMan.getSales();
         }
         double teenMillions = 10000000.0;
-        System.out.printf("Доход будет составлять %d%n", (int) income);
         return teenMillions < income;
     }
 

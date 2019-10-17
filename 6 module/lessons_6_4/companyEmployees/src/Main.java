@@ -32,7 +32,5 @@ public class Main {
                 company.fireEmployees();
             }
         }
-//        System.out.println(company.incomeCompany);                                                  //прежний метод
-        System.out.println(company.getIncomeCompany());
     }
 }

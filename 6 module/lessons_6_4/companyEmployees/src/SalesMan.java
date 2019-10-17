@@ -16,7 +16,7 @@ public class SalesMan extends AbstractEmployees {
 
     @Override
     public void setSalary(double salary) {
-        this.salary += salary;
+        this.salary = salary;
     }
 
     private int sales() {

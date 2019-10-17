@@ -14,4 +14,9 @@ public class TopManager extends AbstractEmployees {
     public double getMonthSalary() {
         return salary;
     }
+
+    @Override
+    public double getEmployeeRevenue() {
+        return 0;
+    }
 }
