@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class Company {
     private static final double PERSENT_TOP_MANAGER = 0.05;
@@ -11,20 +12,23 @@ public class Company {
     private Comparator<AbstractEmployees> comparator = new ComparatorSalary().thenComparing
             (new ComparatorName());
 
-    public void recruitEmployees(int countEmployees) {                                              //наём сотрудников в компанию
-        for (int i = 0; i < countEmployees * PERSENT_SALES; i++) {
-            listEmployeesCompany.add(SalesMan.createSalesMan("SalesMan" + i));
-        }
-        for (int i = 0; i < countEmployees * PERSENT_CLEARK; i++) {
-            listEmployeesCompany.add(Clerk.createCleark("Cleark" + i));
-        }
-        for (int i = 0; i < countEmployees * PERSENT_TOP_MANAGER; i++) {
-            listEmployeesCompany.add(TopManager.createTopManager("TopManager" + i));
-        }
+    public void recruitEmployees(int countEmployees) {
+        addEmployees((int) (countEmployees * PERSENT_TOP_MANAGER),
+                ()-> TopManager.createTopManager("TopManager"));
+        addEmployees((int) (countEmployees * PERSENT_SALES),
+                ()-> SalesMan.createSalesMan("SalesMan"));
+        addEmployees((int) (countEmployees * PERSENT_CLEARK),
+                ()-> Clerk.createCleark("Cleark"));
         if (isIncomeOverTenMillions()) {
             appointPremiaTopManager();
         }
         listEmployeesCompany.sort(comparator);
+    }
+
+    private void addEmployees(int countEmployees, Supplier<AbstractEmployees> generator) {
+        for (int i = 0; i < countEmployees; i++) {
+            listEmployeesCompany.add(generator.get());
+        }
     }
 
     private int getIncomeCompany() {                                                                //получение дохода компании
