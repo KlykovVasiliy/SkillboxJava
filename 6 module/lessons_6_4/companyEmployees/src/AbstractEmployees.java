@@ -1,16 +1,21 @@
 public abstract class AbstractEmployees implements Employee {
     private String name;
-    private double salary = 0.0;
+    private int salary;
 
-    protected AbstractEmployees(String name) {
+    protected AbstractEmployees(String name, int salary) {
         this.name = name;
+        this.salary = salary;
     }
 
     protected String getName() {
         return name;
     }
 
-    protected void setSalary(double salary) {
+    protected void setName(String name) {
+        this.name = name;
+    }
+
+    protected void setSalary(int salary) {
         this.salary = salary;
     }
 }

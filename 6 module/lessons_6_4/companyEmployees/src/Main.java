@@ -6,7 +6,7 @@ public class Main {
         List<AbstractEmployees> list;
 
         //наём 270 сотрудников
-        company.recruitEmployees(10, 170, 90);
+        company.recruitEmployees(270);
 
         System.out.println("Список сотрудников организации.");
         company.printListEmployeesCompany();
@@ -29,7 +29,7 @@ public class Main {
             System.out.println();
 
             if (i == 0) {
-                company.fireEmployees();
+                company.fireAnEmployees();
             }
         }
     }
