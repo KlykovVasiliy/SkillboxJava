@@ -19,9 +19,7 @@ public class Company {
                 ()-> SalesMan.createSalesMan());
         addEmployees((int) (countEmployees * PERSENT_CLEARK),
                 ()-> Clerk.createCleark());
-        if (isIncomeOverTenMillions()) {
-            appointPremiaTopManager();
-        }
+        appointPremiaTopManager();
         listEmployeesCompany.sort(comparator);
     }
 
@@ -50,11 +48,13 @@ public class Company {
 
     private void appointPremiaTopManager() {                                                        //назначение премиии топ менеджеру
         double persentageOfIncomeCompany = 0.05;
-        double salaryTopManager =
-                getIncomeCompany() * persentageOfIncomeCompany / getCountTopManager();
-        for (AbstractEmployees ob : listEmployeesCompany) {
-            if (ob instanceof TopManager) {
-                ((TopManager) ob).giveAPremia(salaryTopManager);
+        if (isIncomeOverTenMillions()) {
+            double salaryTopManager =
+                    getIncomeCompany() * persentageOfIncomeCompany / getCountTopManager();
+            for (AbstractEmployees ob : listEmployeesCompany) {
+                if (ob instanceof TopManager) {
+                    ((TopManager) ob).giveAPremia(salaryTopManager);
+                }
             }
         }
     }
