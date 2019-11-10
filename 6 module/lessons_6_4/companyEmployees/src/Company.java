@@ -33,13 +33,13 @@ public class Company {
 
     private int getIncomeCompany() {                                                                //получение дохода компании
         int income = 0;
-        for (Employee employee : listEmployeesCompany) {
+        for (AbstractEmployees employee : listEmployeesCompany) {
             income += employee.getEmployeeRevenue();
         }
         return income;
     }
 
-    private boolean isIncomeOverTenMillions() {                                                       //проверка что доход компании
+    private boolean isIncomeOverTenMillions() {                                                     //проверка что доход компании
         int tenMillions = 10000000;                                                                 //более 10млн
         return getIncomeCompany() > tenMillions;
     }
@@ -65,23 +65,9 @@ public class Company {
 
     public void fireAnEmployees() {                                                                   //увольнение сотрудников
         int removeCount = 0;
-        for (int i = 0; i < listEmployeesCompany.size(); i++) {
-            int removeEmployee = generateRandomEmployeeSelection();
-            if (listEmployeesCompany.get(removeEmployee) instanceof SalesMan) {                     //заменить instanceof
-                if (!isIncomeOverTenMillions()) {
-                    System.out.println("Менеджер по продажам не может быть уволен, иначе дохода " +
-                            "компании будет недостаточно для премирования топ менеджеров.");
-                } else {
-                    listEmployeesCompany.remove(removeEmployee);
-                    removeCount++;
-                }
-            } else {
-                listEmployeesCompany.remove(removeEmployee);
-                removeCount++;
-            }
-            if (removeCount >= listEmployeesCompany.size() / 10) {
-                break;
-            }
+        while (removeCount <= listEmployeesCompany.size() / 10) {
+            listEmployeesCompany.remove(generateRandomEmployeeSelection());
+            removeCount++;
         }
     }
 

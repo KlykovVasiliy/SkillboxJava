@@ -1,14 +1,12 @@
 public class TopManager extends AbstractEmployees {
     private static final int MIN_SALARY = 30000;
     private static final int MAX_SALARY = 40000;
-    private  int salary;
     private final int salaryWithoutPremia;
-    private String name;
 
     private TopManager(String name, int salary) {
-        super(name);
+        super(name, salary);
         salaryWithoutPremia = salary;
-        this.salary = salary;
+        setSalary(salary);
     }
 
     public static TopManager createTopManager() {
@@ -17,21 +15,11 @@ public class TopManager extends AbstractEmployees {
 
     protected void giveAPremia(double money) {
         if (isPremiaNotBeen()) {
-            salary += money;
+            setSalary((int) (getMonthSalary() + money));
         }
     }
 
     private boolean isPremiaNotBeen() {
-        return salary == salaryWithoutPremia;
-    }
-
-    @Override
-    public double getMonthSalary() {
-        return salary;
-    }
-
-    @Override
-    public double getEmployeeRevenue() {
-        return 0;
+        return getMonthSalary() == salaryWithoutPremia;
     }
 }

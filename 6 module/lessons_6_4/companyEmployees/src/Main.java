@@ -16,14 +16,14 @@ public class Main {
         for (int i = 0; i < 2; i++) {
             list = company.getLowestSalaryStaff(10);
             System.out.println("Вывод топ низких зарплат.");
-            for (Employee em : list) {
+            for (AbstractEmployees em : list) {
                 System.out.println(em.getMonthSalary());
             }
             System.out.println();
 
             list = company.getTopSalaryStaff(10);
             System.out.println("Вывод топ высоких зарплат.");
-            for (Employee em : list) {
+            for (AbstractEmployees em : list) {
                 System.out.println(em.getMonthSalary());
             }
             System.out.println();
