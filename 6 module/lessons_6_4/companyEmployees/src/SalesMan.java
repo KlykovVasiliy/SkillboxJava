@@ -7,19 +7,14 @@ public class SalesMan extends AbstractEmployees {
     private String name;
 
     private SalesMan(String name, int salary) {
-        super(name, salary);
+        super(name);
         amountSales = sales();
         salary += (int) (amountSales * PERSENTAGE_OF_SALES);
-        setSalary(salary);
+        this.salary = salary;
     }
 
-    public static SalesMan createSalesMan(String name) {
-        return new SalesMan(name, generateASalary(MIN_SALARY, MAX_SALARY));
-    }
-
-    private static int generateASalary(int min, int max) {
-        max -= min;
-        return (int) (Math.random() * ++max) + min;
+    public static SalesMan createSalesMan() {
+        return new SalesMan("SalesMan", generateASalary(MIN_SALARY, MAX_SALARY));
     }
 
     private int sales() {
@@ -27,16 +22,6 @@ public class SalesMan extends AbstractEmployees {
         int maxSale = 300000;
         maxSale -= minSale;
         return (int) (Math.random() * maxSale) + minSale;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public void setSalary(int salary) {
-        this.salary = salary;
     }
 
     @Override

@@ -1,35 +1,28 @@
 public class TopManager extends AbstractEmployees {
     private static final int MIN_SALARY = 30000;
     private static final int MAX_SALARY = 40000;
-    private int salary;
+    private  int salary;
+    private final int salaryWithoutPremia;
     private String name;
 
     private TopManager(String name, int salary) {
-        super(name, salary);
-        setSalary(salary);
+        super(name);
+        salaryWithoutPremia = salary;
+        this.salary = salary;
     }
 
-    public static TopManager createTopManager(String name) {
-        return new TopManager(name, generateASalary(MIN_SALARY, MAX_SALARY));
-    }
-
-    private static int generateASalary(int min, int max) {
-        max -= min;
-        return (int) (Math.random() * ++max) + min;
+    public static TopManager createTopManager() {
+        return new TopManager("TopManager", generateASalary(MIN_SALARY, MAX_SALARY));
     }
 
     protected void giveAPremia(double money) {
-        salary += money;
+        if (isPremiaNotBeen()) {
+            salary += money;
+        }
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public void setSalary(int salary) {
-        this.salary = salary;
+    private boolean isPremiaNotBeen() {
+        return salary == salaryWithoutPremia;
     }
 
     @Override

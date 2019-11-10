@@ -2,13 +2,16 @@ public abstract class AbstractEmployees implements Employee {
     private String name;
     private int salary;
 
-    protected AbstractEmployees(String name, int salary) {
+    protected AbstractEmployees(String name) {
         this.name = name;
-        this.salary = salary;
     }
 
     protected String getName() {
         return name;
+    }
+
+    protected static int generateASalary(int min, int max) {
+        return (int) (Math.random() * (max - min + 1)) + min;
     }
 
     protected void setName(String name) {

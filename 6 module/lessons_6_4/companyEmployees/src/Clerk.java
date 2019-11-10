@@ -5,26 +5,12 @@ public class Clerk extends AbstractEmployees {
     private String name;
 
     private Clerk(String name, int salary) {
-        super(name, salary);
-        setSalary(salary);
-    }
-
-    public static Clerk createCleark(String name) {
-        return new Clerk(name, generateASalary(MIN_SALARY, MAX_SALARY));
-    }
-
-    private static int generateASalary(int min, int max) {
-        max -= min;
-        return (int) (Math.random() * ++max) + min;
-    }
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public void setSalary(int salary) {
+        super(name);
         this.salary = salary;
+    }
+
+    public static Clerk createCleark() {
+        return new Clerk("Cleark", generateASalary(MIN_SALARY, MAX_SALARY));
     }
 
     @Override

@@ -14,11 +14,11 @@ public class Company {
 
     public void recruitEmployees(int countEmployees) {
         addEmployees((int) (countEmployees * PERSENT_TOP_MANAGER),
-                ()-> TopManager.createTopManager("TopManager"));
+                ()-> TopManager.createTopManager());
         addEmployees((int) (countEmployees * PERSENT_SALES),
-                ()-> SalesMan.createSalesMan("SalesMan"));
+                ()-> SalesMan.createSalesMan());
         addEmployees((int) (countEmployees * PERSENT_CLEARK),
-                ()-> Clerk.createCleark("Cleark"));
+                ()-> Clerk.createCleark());
         if (isIncomeOverTenMillions()) {
             appointPremiaTopManager();
         }
