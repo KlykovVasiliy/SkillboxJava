@@ -19,6 +19,10 @@ public class TopManager extends AbstractEmployees {
         }
     }
 
+    protected void depriveBonus () {
+        setSalary(salaryWithoutPremia);
+    }
+
     private boolean isPremiaNotBeen() {
         return getMonthSalary() == salaryWithoutPremia;
     }

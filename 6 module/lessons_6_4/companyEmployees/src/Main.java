@@ -6,9 +6,9 @@ public class Main {
         List<AbstractEmployees> list;
 
         //наём 270 сотрудников
-        company.recruitEmployees(270);
-
-        System.out.println("Список сотрудников организации.");
+        company.recruitEmployees(90);
+        System.out.println("Доход компании в самом начале " + company.getIncomeCompany());
+        System.out.println("Список сотрудников организации с зарплатами.");
         company.printListEmployeesCompany();
         System.out.printf("Вывод списка сотрудников организации с зарплатами завершен.%n" +
                 "===========================================================================%n%n");
@@ -29,8 +29,20 @@ public class Main {
             System.out.println();
 
             if (i == 0) {
-                company.fireAnEmployees();
+                company.fireAnEmployees(20);
             }
         }
+
+        System.out.println("Вывод списка сотрудников после увольнения");
+        System.out.println("Доход компании составляет " + company.getIncomeCompany());
+        company.printListEmployeesCompany();
+
+        System.out.printf("%n%nТоп менеджеры одумались, поняли что они накосячили по крупному" +
+                "и решили нанять вновь продажников.%n");
+        company.recruitSalesMan(15);
+        System.out.println("Доход компании после принятия на работу продажников составляет "
+                + company.getIncomeCompany());
+        company.printListEmployeesCompany();
+
     }
 }
