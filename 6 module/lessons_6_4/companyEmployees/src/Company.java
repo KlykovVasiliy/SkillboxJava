@@ -7,32 +7,41 @@ public class Company {
     private static final double PERSENT_TOP_MANAGER = 0.05;
     private static final double PERSENT_SALES = 0.65;
     private static final double PERSENT_CLEARK = 0.3;
+    private static final int SALES_PLAN = 10000000;
+
+    private Company() {
+    }
+
+    public static Company createCompany() {
+        return new Company();
+    }
 
     private List<AbstractEmployees> listEmployeesCompany = new ArrayList<>(270);
     private Comparator<AbstractEmployees> comparator = new ComparatorSalary().thenComparing
             (new ComparatorName());
 
-    public void recruitEmployees(int countEmployees) {
-        recruitTopManager((int)(countEmployees * PERSENT_TOP_MANAGER));
-        recruitSalesMan((int) (countEmployees * PERSENT_SALES));
-        recruitCleark((int) (countEmployees * PERSENT_CLEARK));
-    }
-
-    public void recruitTopManager(int countEmployees) {
-        addEmployees(countEmployees, ()-> TopManager.createTopManager());
+    public void recruitEmployees(Company company, int countEmployees) {
+        recruitTopManager(company, (int) (countEmployees * PERSENT_TOP_MANAGER));
+        recruitSalesMan(company, (int) (countEmployees * PERSENT_SALES));
+        recruitCleark(company, (int) (countEmployees * PERSENT_CLEARK));
         sortEmployees();
     }
 
-    public void recruitSalesMan(int countEmployees) {
-        addEmployees(countEmployees, ()-> SalesMan.createSalesMan());
-        appointDeprivePremiaTopManager();
+    public void recruitTopManager(Company company, int countEmployees) {
+        addEmployees(countEmployees, () -> TopManager.createTopManager(company));
         sortEmployees();
     }
 
-    public void recruitCleark(int countEmployees) {
-        addEmployees(countEmployees, ()-> Clerk.createCleark());
+    public void recruitSalesMan(Company company, int countEmployees) {
+        addEmployees(countEmployees, () -> SalesMan.createSalesMan(company));
         sortEmployees();
     }
+
+    public void recruitCleark(Company company, int countEmployees) {
+        addEmployees(countEmployees, () -> Clerk.createCleark(company));
+        sortEmployees();
+    }
+
 
     private void addEmployees(int countEmployees, Supplier<AbstractEmployees> generator) {
         for (int i = 0; i < countEmployees; i++) {
@@ -52,36 +61,17 @@ public class Company {
         return income;
     }
 
-    private boolean isIncomeOverTenMillions() {                                                     //проверка что доход компании
-        int tenMillions = 10000000;                                                                 //более 10млн
-        return getIncomeCompany() > tenMillions;
+    protected boolean isIncomeOverSalesPlan() {
+        return getIncomeCompany() > SALES_PLAN;
+    }
+
+    public int getPremiaTopManager() {
+        double persentageOfIncomeCompany = 0.05;
+        return (int) (getIncomeCompany() * persentageOfIncomeCompany / getCountTopManager());
     }
 
     private int getCountTopManager() {                                                              //получение числа топ менеджеров
         return (int) listEmployeesCompany.stream().filter(e -> e instanceof TopManager).count();
-    }
-
-    private void appointDeprivePremiaTopManager() {                                                        //назначение премиии топ менеджеру
-        double persentageOfIncomeCompany = 0.05;
-        if (isIncomeOverTenMillions()) {
-            double salaryTopManager =
-                    getIncomeCompany() * persentageOfIncomeCompany / getCountTopManager();
-            for (AbstractEmployees ob : listEmployeesCompany) {
-                if (ob instanceof TopManager) {
-                    ((TopManager) ob).giveAPremia(salaryTopManager);
-                }
-            }
-        } else {
-            deprivePremia();
-        }
-    }
-
-    private void deprivePremia() {
-        for (AbstractEmployees ob : listEmployeesCompany) {
-            if (ob instanceof TopManager) {
-                ((TopManager) ob).depriveBonus();
-            }
-        }
     }
 
     private int generateRandomEmployeeSelection() {                                                 //генерация случайной выборки
@@ -92,8 +82,6 @@ public class Company {
         for (int i = 0; i < count; i++) {
             listEmployeesCompany.remove(generateRandomEmployeeSelection());
         }
-        appointDeprivePremiaTopManager();
-        sortEmployees();
     }
 
     public void fireAnSalesMan() {
@@ -101,7 +89,6 @@ public class Company {
         if (listEmployeesCompany.get(removeEmployee) instanceof SalesMan) {
             listEmployeesCompany.remove(removeEmployee);
         }
-        appointDeprivePremiaTopManager();
     }
 
     public void fireAnCleark() {
@@ -118,23 +105,20 @@ public class Company {
         }
     }
 
-
-
     public void printListEmployeesCompany() {
         int count = 1;
         for (AbstractEmployees ob : listEmployeesCompany) {
             System.out.println(count + " " + ob.getName() + " " + ob.getMonthSalary());
             count++;
         }
-
     }
 
     public List<AbstractEmployees> getTopSalaryStaff(int count) {
         int topSalaryStart = listEmployeesCompany.size();
-        return listEmployeesCompany.subList(topSalaryStart - count, topSalaryStart - 1);
+        return listEmployeesCompany.subList(topSalaryStart - count, topSalaryStart);
     }
 
     public List<AbstractEmployees> getLowestSalaryStaff(int count) {
-        return listEmployeesCompany.subList(0, count - 1);
+        return listEmployeesCompany.subList(0, count);
     }
 }
