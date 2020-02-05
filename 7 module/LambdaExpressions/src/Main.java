@@ -2,6 +2,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 import static java.util.Collections.*;
 
 public class Main {
@@ -23,6 +24,15 @@ public class Main {
         for (Employee employee : staff) {
             System.out.println(employee);
         }
+
+        System.out.printf("%nМаксимальная зарплата сотрудника пришедшего в 2017 году%n" +
+            staff.stream()
+                .filter(y -> getYear(y.getWorkStart()) == 2017)
+                .max(Comparator.comparing(Employee::getSalary)).get() + "%n");
+    }
+    private static int getYear(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("yyy");
+        return Integer.parseInt(df.format(date));
     }
 
     private static ArrayList<Employee> loadStaffFromFile() {
