@@ -3,8 +3,6 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static java.util.Collections.*;
-
 public class Main {
     private static String staffFile = "data/staff.txt";
     private static String dateFormat = "dd.MM.yyyy";
@@ -12,14 +10,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Employee> staff = loadStaffFromFile();
 
-        sort(staff, (o1, o2) -> {
-            int result = o1.getSalary().compareTo(o2.getSalary());
-            if (result == 0) {
-                return o1.getName().compareTo(o2.getName());
-            } else {
-                return result;
-            }
-        });
+        staff.sort(Comparator.comparing(Employee::getSalary).thenComparing(Employee::getName));
 
         for (Employee employee : staff) {
             System.out.println(employee);
