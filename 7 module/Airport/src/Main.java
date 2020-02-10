@@ -36,15 +36,13 @@ public class Main {
     public static void listingAircraftForTheNextTwoHours(Airport airport) {
         timeDisplayNow(timeNow.getTime());
         Stream.of(airport)
-                .map(Airport::getTerminals)
-                .flatMap(terminals -> terminals.stream()
-                        .map(Terminal::getFlights)
-                        .flatMap(flights -> flights.stream()
-                                .filter(flight -> flight.getType().equals(Flight.Type.DEPARTURE)
-                                        && isLessThanTwoHours(flight.getDate()))
-                                .sorted(Comparator.comparing(Flight::getDate)))                     //не работает сортировка по времени
-                )
-                .forEach(System.out::println);
+                .flatMap(t -> t.getTerminals().stream())
+                .flatMap(fl -> fl.getFlights().stream())
+                .filter(fl2 -> isLessThanTwoHours(fl2.getDate()))
+                .filter(flight -> flight.getType().equals(Flight.Type.DEPARTURE))
+                .sorted(Comparator.comparing(Flight::getDate))
+                .forEach(t -> System.out.println(timeFormat.format(t.getDate()) + " = " +
+                        t.getAircraft().getModel()));
     }
 
     public static boolean isLessThanTwoHours(Date dateDeparture) {
