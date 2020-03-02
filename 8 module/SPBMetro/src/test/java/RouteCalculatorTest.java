@@ -1,27 +1,27 @@
 import core.Line;
 import core.Station;
 import junit.framework.TestCase;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RouteCalculatorTest extends TestCase {
 
     /**
-     *          Схема миниметро для тестирования
-     *                     st6                       st10
+     * Схема миниметро для тестирования
+     * st6                       st10
      * --------*----------*------------*---------------*--------*--- (1 line)
-     *        st1    st2 /            st3           st4|       st5
-     *                /                               |
-     *               * st7                           |
-     *              /                               * st11
-     *             * st8                           |
-     *            /                               |
-     *           / st9                           | st12
+     * st1    st2 /            st3           st4|       st5
+     * /                               |
+     * * st7                           |
+     * /                               * st11
+     * * st8                           |
+     * /                               |
+     * / st9                           | st12
      * ---------*-----------------*-------------*---------- (4 line)
-         (2 line)  st13         st14         st15 (3 line)
+     * (2 line)  st13         st14         st15 (3 line)
      */
 
     private RouteCalculator routeCalculator;
@@ -36,31 +36,32 @@ public class RouteCalculatorTest extends TestCase {
     private Line line3 = new Line(3, "Третья");
     private Line line4 = new Line(4, "Четвертая");
 
-    Station st1 = new Station("Айвазовская", line1);
-    Station st2 = new Station("Ставропольская", line1);                                  //Пересадка на вторую линию(st6)
-    Station st3 = new Station("Северная", line1);
-    Station st4 = new Station("Селезнева", line1);                                       //Пересадка на третью линию(st10)
-    Station st5 = new Station("Суворова", line1);
+    Station st1 = new Station("A", line1);
+    Station st2 = new Station("B", line1);                                  //Пересадка на вторую линию(st6)
+    Station st3 = new Station("C", line1);
+    Station st4 = new Station("D", line1);                                       //Пересадка на третью линию(st10)
+    Station st5 = new Station("E", line1);
 
-    Station st6 = new Station("Карасунская", line2);                                     //Пересадка на первую линию(st2)
-    Station st7 = new Station("Седина", line2);
-    Station st8 = new Station("Старокубанская", line2);
-    Station st9 = new Station("Российская", line2);                                      //Пересадка на четвертую линию
+    Station st6 = new Station("F", line2);                                     //Пересадка на первую линию(st2)
+    Station st7 = new Station("G", line2);
+    Station st8 = new Station("H", line2);
+    Station st9 = new Station("I", line2);                                      //Пересадка на четвертую линию
 
-    Station st10 = new Station("Московская", line3);                                     //Пересадка на первую линию(st4)
-    Station st11 = new Station("Зиповская", line3);
-    Station st12 = new Station("Дзержинского", line3);                                   //Пересадка на четвертую линию
+    Station st10 = new Station("J", line3);                                     //Пересадка на первую линию(st4)
+    Station st11 = new Station("K", line3);
+    Station st12 = new Station("L", line3);                                   //Пересадка на четвертую линию
 
-    Station st13 = new Station("Красная", line4);                                        //Пересадка на вторую линию
-    Station st14 = new Station("Гаврилова", line4);
-    Station st15 = new Station("Одесская", line4);                                       //Пересадка на третью линию
+    Station st13 = new Station("M", line4);                                        //Пересадка на вторую линию
+    Station st14 = new Station("O", line4);
+    Station st15 = new Station("P", line4);                                       //Пересадка на третью линию
 
+    private static double TRAVEL_TIME_ON_LINE = 2.5;
+    private static double TIME_TRANSFER_ON_ANOTHER_LINE = 3.5;
 
 
     @Override
     @Before
-    protected void setUp() throws Exception {
-
+    protected void setUp() {
         stationIndex = new StationIndex();
 
         intersection1 = new ArrayList<>();
@@ -68,105 +69,69 @@ public class RouteCalculatorTest extends TestCase {
         intersection3 = new ArrayList<>();
         intersection4 = new ArrayList<>();
 
-        addLines();
+        addLines(line1, line2, line3, line4);
         addStationOnTheLine();
-        addStationsInStationIndex();
+        addStationsInStationIndex(st1, st2, st3, st4, st5, st6, st7, st8, st9, st10, st11, st12, st13, st14, st15);
         addInterSections();
         addInterSectionsInStationIndex();
 
         routeCalculator = new RouteCalculator(stationIndex);
     }
 
-    @Override
-    @After
-    public void tearDown() throws Exception {
-        stationIndex = null;
-        intersection1 = null;
-        intersection2 = null;
-        intersection3 = null;
-        intersection4 = null;
-        routeCalculator = null;
-    }
-
     @Test
     public void testCalculateDurationOnOneTheLine() {
-        double actual = RouteCalculator.calculateDuration(getRoute(st1, st5));
-        double expected = 10;
+        double expected = RouteCalculator.calculateDuration(getRoute(st1, st5));
+        double actual = TRAVEL_TIME_ON_LINE * 4;
         assertEquals(expected, actual);
     }
 
     @Test
     public void testCalculateDurationOnTwoTheLines() {
-        double actual = RouteCalculator.calculateDuration(getRoute(st1, st8));
-        double expected = 11;
+        double expected = RouteCalculator.calculateDuration(getRoute(st1, st8));
+        double actual = TRAVEL_TIME_ON_LINE * 3 + TIME_TRANSFER_ON_ANOTHER_LINE;
         assertEquals(expected, actual);
     }
 
     @Test
     public void testCalculateDurationOnThreeTheLines() {
-        double actual = RouteCalculator.calculateDuration(getRoute(st3, st14));
-        double expected = 17;
+        double expected = RouteCalculator.calculateDuration(getRoute(st3, st14));
+        double actual = TRAVEL_TIME_ON_LINE * 4 + TIME_TRANSFER_ON_ANOTHER_LINE * 2;
         assertEquals(expected, actual);
     }
 
     @Test
     public void testShortestRouteOnOneTheLine() {
-        List<Station> actual = routeCalculator.getShortestRoute(st1, st5);
-        List<Station> expected = createRouteSheetOnOneTheLine();
+        List<Station> expected = routeCalculator.getShortestRoute(st1, st5);
+        List<Station> actual = makeRoute("A", "B", "C", "D", "E");
         assertEquals(expected, actual);
     }
 
     @Test
     public void testShortestRouteOnTwoLines() {
-        List<Station> actual = routeCalculator.getShortestRoute(st1, st8);
-        List<Station> expected = createRouteSheetOnTwoTheLines();
+        List<Station> expected = routeCalculator.getShortestRoute(st1, st8);
+        List<Station> actual = makeRoute("A", "B", "F", "G", "H");
         assertEquals(expected, actual);
     }
 
     @Test
     public void testShortestRouteOnThreeLines() {
-        List<Station> actual = routeCalculator.getShortestRoute(st3, st14);
-        List<Station> expected = createRouteSheetOnThreeTheLines();
+        List<Station> expected = routeCalculator.getShortestRoute(st3, st14);
+        List<Station> actual = makeRoute("C", "D", "J", "K", "L", "P", "O");
         assertEquals(expected, actual);
     }
 
-    private List<Station> createRouteSheetOnOneTheLine() {
-        List<Station> list = new ArrayList<>();
-        list.add(st1);
-        list.add(st2);
-        list.add(st3);
-        list.add(st4);
-        list.add(st5);
-        return list;
+    private List<Station> makeRoute(String... nameStations) {
+        List<Station> stationList = new ArrayList<>();
+        for (String nameStation : nameStations) {
+            stationList.add(stationIndex.getStation(nameStation));
+        }
+        return stationList;
     }
 
-    private List<Station> createRouteSheetOnTwoTheLines () {
-        List<Station> list = new ArrayList<>();
-        list.add(st1);
-        list.add(st2);
-        list.add(st6);
-        list.add(st7);
-        list.add(st8);
-        return list;
-    }
-
-    private List<Station> createRouteSheetOnThreeTheLines () {
-        List<Station> list = new ArrayList<>();
-        list.add(st3);
-        list.add(st4);
-        list.add(st10);
-        list.add(st11);
-        list.add(st12);
-        list.add(st15);
-        list.add(st14);
-        return list;
-    }
-
-    private void addLines() {
-        stationIndex.addLine(line1);
-        stationIndex.addLine(line2);
-        stationIndex.addLine(line3);
-        stationIndex.addLine(line4);
+    private void addLines(Line... lines) {
+        for (Line line : lines) {
+            stationIndex.addLine(line);
+        }
     }
 
     private void addStationOnTheLine() {
@@ -187,22 +152,10 @@ public class RouteCalculatorTest extends TestCase {
         line4.addStation(st15);
     }
 
-    private void addStationsInStationIndex() {
-        stationIndex.addStation(st1);
-        stationIndex.addStation(st2);
-        stationIndex.addStation(st3);
-        stationIndex.addStation(st4);
-        stationIndex.addStation(st5);
-        stationIndex.addStation(st6);
-        stationIndex.addStation(st7);
-        stationIndex.addStation(st8);
-        stationIndex.addStation(st9);
-        stationIndex.addStation(st10);
-        stationIndex.addStation(st11);
-        stationIndex.addStation(st12);
-        stationIndex.addStation(st13);
-        stationIndex.addStation(st14);
-        stationIndex.addStation(st15);
+    private void addStationsInStationIndex(Station... stations) {
+        for (Station station : stations) {
+            stationIndex.addStation(station);
+        }
     }
 
     private void addInterSections() {
