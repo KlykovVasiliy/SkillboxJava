@@ -1,5 +1,7 @@
 import core.Line;
 import core.Station;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,7 +13,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static String dataFile = "src/main/resources/map.json";
+    private static final Logger LOGGER_INFO = LogManager.getLogger("station.found");
+    private static final Logger LOGGER_WARN = LogManager.getLogger("station");
+    private static final Logger LOGGER_EXCEPTION = LogManager.getLogger("metro");
+
+    private static String dataFile = "src/main/resources/ma_p.json";
     private static Scanner scanner;
 
     private static StationIndex stationIndex;
@@ -61,9 +67,13 @@ public class Main {
             String line = scanner.nextLine().trim();
             Station station = stationIndex.getStation(line);
             if (station != null) {
+                LOGGER_INFO.info("Искали станцию \"{}\"", station.getName() );                        //лог о том какие файлы ищут
                 return station;
+            } else {
+                LOGGER_WARN.warn("Станция \"{}\" введена с ошибкой", line);
+                System.out.println("Станция не найдена :(");
             }
-            System.out.println("Станция не найдена :(");
+
         }
     }
 
@@ -82,6 +92,7 @@ public class Main {
             JSONArray connectionsArray = (JSONArray) jsonData.get("connections");
             parseConnections(connectionsArray);
         } catch (Exception ex) {
+            LOGGER_EXCEPTION.error("Отсутствует карта метро", ex);
             ex.printStackTrace();
         }
     }
