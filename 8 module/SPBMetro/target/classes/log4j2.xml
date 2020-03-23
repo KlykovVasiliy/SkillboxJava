@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Loggers>
+        <Logger name="station.found" level="info">
+            <appender-ref ref="SearchSuccessful" level="info"/>
+        </Logger>
+
+        <Logger name="station" level="warn">
+            <appender-ref ref="SearchError" level="warn"/>
+        </Logger>
+
+        <Logger name="metro">
+            <appender-ref ref="NoCardMetro" level="warn"/>
+        </Logger>
+
+        <Root level="error">
+            <appender-ref ref="Errors" level="info"/>
+        </Root>
+    </Loggers>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <File name="SearchSuccessful" fileName="logs/stationInfo.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="SearchError" fileName="logs/stationWarn.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="NoCardMetro" fileName="logs/ExceptionToMap.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="Errors" fileName="logs/errors.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+    </Appenders>
+</Configuration>
