@@ -13,22 +13,22 @@ import java.util.List;
 public class Main {
     private static int sizeTable;
     public static void main(String[] args) {
+        Session session = createSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
 
-        try (SessionFactory sessionFactory = createSessionFactory();
-             Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+        Course course = session.get(Course.class, 1);
+        System.out.println(course.getStudents().size());
 
-            Course course = session.get(Course.class, 1);
-            System.out.println(course.getStudents().size());
-
-            List<Student> studentList = course.getStudents();
-            for (Student student : studentList) {
-                System.out.println(student.getName());
-            }
-            transaction.commit();
+        List<Student> studentList = course.getStudents();
+        for (Student student : studentList) {
+            System.out.println(student.getName());
         }
+
+        transaction.commit();
     }
 
+    //Как делать sessionFactory.close() если объект sessionFactory перенесен в метод и не исполняется
+    //в методе main, отличие от примера Даниила
     private static SessionFactory createSessionFactory() {
         sizeTable = getSizeTable();
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()

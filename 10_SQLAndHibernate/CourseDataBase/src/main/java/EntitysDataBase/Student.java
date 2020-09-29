@@ -14,7 +14,7 @@ public class Student {
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany
+//    @OneToMany
     private int id;
 
     @Getter

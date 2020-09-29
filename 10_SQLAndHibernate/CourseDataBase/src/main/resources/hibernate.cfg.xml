@@ -23,6 +23,5 @@
         <mapping class="EntitysDataBase.Course"></mapping>
         <mapping class="EntitysDataBase.Teacher"></mapping>
         <mapping class="EntitysDataBase.Student"></mapping>
-        <mapping class="EntitysDataBase.PurChaseList"></mapping>
     </session-factory>
 </hibernate-configuration>
